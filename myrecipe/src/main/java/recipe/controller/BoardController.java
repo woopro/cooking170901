@@ -95,9 +95,11 @@ public class BoardController {
 	public String info(@RequestParam("no") int no, Model model) {
 		BoardDto bdto = bdao.info(no);
 		model.addAttribute("bdto", bdto);
+		model.addAttribute("pw", bdto.getPw());
 		return "board/info";
 	}
 	
+
 	@RequestMapping("/pw")
 	public String checkpw(@RequestParam("next") String next, 
 						  @RequestParam("no") int no, Model model) {
@@ -115,6 +117,7 @@ public class BoardController {
 		boolean result = bdao.checkpw(no, pw);
 		if(result) {
 			model.addAttribute("success", "yes");
+			model.addAttribute("next", next);
 			return "board/pw";
 		}else {
 			model.addAttribute("fail", "yes");

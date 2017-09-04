@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file= "/WEB-INF/view/template/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
 
 <script>
-	function checkpw(target, no) {
+	function checkpw(next, no) {
 		var width = 450;
 		var height = 150;
 		var left = (screen.availWidth-width)/2;
 		var top = (screen.availHeight-height)/2;
 		var opt = "width="+width+", height="+height+", left="+left+", top="+top;
-		window.open("pw?next="+target+"&no="+no, "check", opt);
+		window.open("pw?next="+next+"&no="+no, "check", opt);
 	}
 </script>
 

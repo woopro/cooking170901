@@ -7,18 +7,17 @@
 <c:choose>
 	<c:when test="${fail=='no'}">
 		<script>
-			window.alert("비밀번호를 입력하여 주세요");
-		</script>
+   			window.alert("비밀번호를 입력하여 주세요"); 
+ 		</script> 
 	</c:when>
 	<c:when test="${success=='yes'}">
 		<script>
-			location.href='${next}';
-			window.close();
+ 			window.close();
 		</script>
 	</c:when>
 	<c:otherwise>
 		<script>
-			window.alert("비밀번호가 잘못되었습니다.");
+ 			window.alert("비밀번호가 잘못되었습니다.");			
 		</script>
 	</c:otherwise>	
 </c:choose>
@@ -26,7 +25,7 @@
 <div class="empty-row"></div>
 <div>
 	<div align="center">
-		<form action="pw" method="post">
+		<form action="pw" method="post" name="f">
 		<input type="hidden" name="next" value="${next}">
 		<input type="hidden" name="board_no" value="${no}">
 		<input type="password" name="pw" placeholder="비밀번호 입력">

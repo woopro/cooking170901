@@ -18,11 +18,11 @@
 		preContent = curContent;
 	}
 	
-	function select(type) {
-		var t = document.querySelector(type);
-		console.log("type = "+type);
-		return false;
-	}
+// 	function select(type) {
+// 		var t = document.querySelector(type);
+// 		console.log("type = "+type);
+// 		return false;
+// 	}
 	
 </script>
 
