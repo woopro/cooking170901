@@ -51,19 +51,9 @@
 				<c:forEach var="mdto" items="${mdto}">
 					<a href="mdetail?no=${mdto.menu_no}">
 						<div class="menu_item">
-<<<<<<< HEAD
 							<img src="http://via.placeholder.com/200x110">
 							<h4>메뉴 : <label>${mdto.name}</label></h4>
-							<h4>가겨 : <label>${mdto.price}</label></h4>
-=======
-							<h4>메뉴 명 : 
-							<label>${mdto.name}</label>
-							</h4>
-							<br>
-							<h4>가격 :
-							<label>${mdto.price}</label>
-							</h4>
->>>>>>> branch 'master' of https://github.com/woopro/cooking170901
+							<h4>가격 : <label>${mdto.price}</label></h4>
 						</div>
 					</a>
 				</c:forEach>
@@ -71,17 +61,7 @@
 		</div>
 	</div>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/woopro/cooking170901
 </body>
 </html>
 
-<<<<<<< HEAD
 <%@ include file="/WEB-INF/view/template/footer.jsp"%>
-=======
-
-
-<%@ include file="/WEB-INF/view/template/footer.jsp"%>
->>>>>>> branch 'master' of https://github.com/woopro/cooking170901
