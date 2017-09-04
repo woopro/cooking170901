@@ -3,8 +3,6 @@ package recipe.model.order;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.servlet.http.HttpServletRequest;
-
 public class Order {
 	private int no_member;
 	private int no_menu;

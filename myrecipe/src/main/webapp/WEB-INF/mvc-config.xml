@@ -9,7 +9,6 @@
     <mvc:resources location="/resource/css/" mapping="/css/**"/>
 	<mvc:resources location="/resource/image/" mapping="/image/**"/>
 	<mvc:resources location="/resource/js/" mapping="/js/**"/>
-   <mvc:resources location="/resource/image/" mapping="/image/**"/>
 
 
    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -17,9 +16,9 @@
            <property name="suffix" value=".jsp"/>
    </bean>
    
+   <context:component-scan base-package="recipe.model.order"/>
    <context:component-scan base-package="recipe.model.board"/>
    <context:component-scan base-package="recipe.model.member"/>
    <context:component-scan base-package="recipe.model.menu"/>
-   <context:component-scan base-package="recipe.model.order"/>
    <context:component-scan base-package="recipe.controller"/>
 </beans>

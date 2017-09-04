@@ -18,6 +18,7 @@ import recipe.model.member.MemberDaoImpl;
 import recipe.model.member.MemberDto;
 import recipe.model.menu.MenuDao;
 import recipe.model.menu.MenuDto;
+import recipe.model.order.Order;
 import recipe.model.order.OrderDaoImpl;
 
 @Controller
