@@ -44,12 +44,9 @@
 	<div>
 		<h1>Menu List !</h1>
 		<div>
-			<div class="admin_option" align="right">
-				관리자 옵션 <a href="madd"><input type="button" value="메뉴 추가"></a>
-			</div>
 			<div class="menu_grid center">
 				<c:forEach var="mdto" items="${mdto}">
-					<a href="mdetail?no=${mdto.menu_no}">
+					<a href="order?no=${mdto.menu_no}">
 						<div class="menu_item">
 							<img src="http://via.placeholder.com/200x110">
 							<h4>메뉴 : <label>${mdto.name}</label></h4>

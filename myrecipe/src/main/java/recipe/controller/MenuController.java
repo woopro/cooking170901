@@ -55,7 +55,7 @@ public class MenuController {
 	@RequestMapping(value="madd", method=RequestMethod.POST)
 	public String MenuAdd(HttpServletRequest req) throws SQLException {
 		int no = mdao.add(new MenuDto(req));
-		return "redirect:/mDetail?no="+no;
+		return "redirect:/mdetail?no="+no;
 	}
 	
 	//메뉴 상세정보로 이동
@@ -66,4 +66,10 @@ public class MenuController {
 		return "menu/menuDetail";
 	}
 	
+	//메뉴 삭제 기능 수행
+		@RequestMapping("mdelete")
+		public String MenuDelete(@RequestParam("no") int no, Model model) {
+			MenuDto mdto = mdao.delete(no);
+			return "mlist";
+		}
 }

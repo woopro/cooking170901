@@ -22,7 +22,6 @@ public class MenuDaoImpl implements MenuDao {
 	
 	@Override
 	public int add(MenuDto mdto) {
-		log.info("add방문");
 		String sql = "select menu_seq.nextval from dual";
 		int no = jdbcTemplate.queryForObject(sql, Integer.class);
 		sql = "insert into menu values(?,?,?,?,?,?,?,?,?,?,?,?,sysdate)";
@@ -40,7 +39,6 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public MenuDto info(int no) {
-		log.info("info방문 : no = "+no);
 		ResultSetExtractor<MenuDto> extractor = (rs)->{
 			return rs.next()?new MenuDto(rs):null;
 		};
@@ -50,9 +48,15 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public List<MenuDto> list(String type, String key) {
-		log.info("list sql 실행");
 		String sql = "select * from menu where "+type+" like '%'||?||'%' order by reg desc";
 		return jdbcTemplate.query(sql, new Object[] {key} ,mapper);
+	}
+
+	@Override
+	public MenuDto delete(int no) {
+		String sql = "delete no=? from menu";
+		jdbcTemplate.query(sql, new Object[] {no} ,mapper);
+		return null;
 	}
 
 }
