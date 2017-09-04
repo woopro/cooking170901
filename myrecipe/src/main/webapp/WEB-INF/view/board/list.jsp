@@ -28,7 +28,6 @@
 <div class="page center">
 	<br>
 	<div class="empty-row"></div>
-	out.println(${ckValue});
 	<div class="board_nav center">
 		<div style="display: inline;"><span><a href="#q1">자주 묻는 질문(FAQ)</a></span> &nbsp; / &nbsp;</div>
 		<div style="display: inline;"><span><a href="#q2">문의 게시판</a></span></div>

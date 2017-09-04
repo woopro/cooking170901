@@ -4,11 +4,8 @@
 
 <%@ include file= "/WEB-INF/view/template/header.jsp" %>
 
+<script src="http://code.jquery.com/jquery-3.2.1.js"></script>
 <link rel="stylesheet" type="text/css" href="/myrecipe/css/main.css">
- <link rel="stylesheet" type="text/css" href="/myrecipe/css/jquery.cleditor.css">
- <script type="text/javascript" src="/myrecipe/js/jquery.cleditor.min.js"></script>
-
-
 
 <script>
 	function input() {
@@ -46,7 +43,7 @@
 		<div class="row center" style="background-color: rgb(239,239,239)">
 			<h1>문의 글 작성하기</h1>
 		</div>
-		<form action="bwrite" method="post">
+		<form action="bwrite" method="post" name="form">
 			<div class="row center">
 				<table class="user-table">
 					<tr>
@@ -92,7 +89,7 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea rows="10" cols="30" name="detail" id="content"  style="width:650px; height:350px;"
+							<textarea rows="10" cols="30" name="detail" id="content" style="width:650px; height:350px;"
 										onkeydown="input();" onkeyup="input();" class="user-area"></textarea><br>
 							<div id="limit"></div>
 						</td>
