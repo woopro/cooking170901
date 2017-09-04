@@ -99,15 +99,39 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/pw")
-	public String checkpw(@RequestParam("next") String next, Model model) {
+	public String checkpw(@RequestParam("next") String next, 
+						  @RequestParam("no") int no, Model model) {
 		model.addAttribute("next", next);
+		model.addAttribute("no", no);
+		model.addAttribute("fail", "no");
 		return "board/pw";
 	}
 	
 	@RequestMapping(value="/pw", method=RequestMethod.POST)
-	public String checkPw(@RequestParam("next") int no , String next, String pw) {
+	public String checkPw(HttpServletRequest request, Model model) {
+		int no = Integer.parseInt(request.getParameter("board_no"));
+		String next = request.getParameter("next");
+		String pw = request.getParameter("pw");
 		boolean result = bdao.checkpw(no, pw);
-		return "board/"+next;
+		log.info("result = "+result);
+		if(result) {
+			model.addAttribute("success", "yes");
+			model.addAttribute("next", next);
+			return "board/pw";
+		}else {
+			model.addAttribute("fail", "yes");
+			return "redirect:/pw?next="+next+"&no="+no;
+		}
+	}
+	
+	@RequestMapping("/bedit")
+	public String edit() {
+		return "board/edit";
+	}
+	
+	@RequestMapping("/bdelete")
+	public String delete() {
+		return "board/edit";
 	}
 }
 

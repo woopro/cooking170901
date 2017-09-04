@@ -54,21 +54,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public boolean checkpw(int no, String pw) {
-		String sql = "select * from board where no = ? and pw = ?";
+		String sql = "select * from board where board_no =? and pw =?";
 		return jdbcTemplate.update(sql, no, pw) > 0;
 	}
-
-
-//	@Override
-//	public List<BoardDto> list(String type, String keyword) {
-//		RowMapper<BoardDto> mapper = (rs, idx)->{
-//			return new BoardDto(rs);
-//		};
-//		keyword = "%"+keyword+"%";
-//		System.out.println("mapper= "+mapper.toString());
-//		System.out.println("keyword = "+keyword);
-//
-//		String sql = "select * from board where "+type+" like ?";
-//		return jdbcTemplate.query(sql, new Object[] {keyword}, mapper);
-//	}
 }

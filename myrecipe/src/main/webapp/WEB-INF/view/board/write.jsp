@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
 <%@ include file= "/WEB-INF/view/template/header.jsp" %>
 
 <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
 <link rel="stylesheet" type="text/css" href="/myrecipe/css/main.css">
+<script type="text/javascript" src="/myrecipe/js/jquery.cleditor.js"></script>
+<script type="text/javascript" src="/myrecipe/js/ckeditor/ckeditor.js"></script>
 
 <script>
 	function input() {
@@ -45,7 +46,7 @@
 		</div>
 		<form action="bwrite" method="post" name="form">
 			<div class="row center">
-				<table class="user-table">
+				<table class="user-table area-70">
 					<tr>
 						<th>질문유형</th>
 						<td>
@@ -89,8 +90,11 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea rows="10" cols="30" name="detail" id="content" style="width:650px; height:350px;"
-										onkeydown="input();" onkeyup="input();" class="user-area"></textarea><br>
+							<textarea rows="10" cols="30" name="detail" id="content"
+										onkeydown="input();" onkeyup="input();" class="user-area"></textarea>
+										<script>
+											CKEDITOR.replace('content');
+										</script><br>
 							<div id="limit"></div>
 						</td>
 					</tr>

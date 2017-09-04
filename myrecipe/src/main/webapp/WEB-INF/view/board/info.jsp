@@ -4,10 +4,23 @@
 <%@ include file= "/WEB-INF/view/template/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
 
+<script>
+	function checkpw(target, no) {
+		console.log("글 번호  = "+no);
+		console.log("이동 페이지 = "+target);
+		var width = 450;
+		var height = 150;
+		var left = (screen.availWidth-width)/2;
+		var top = (screen.availHeight-height)/2;
+		var opt = "width="+width+", height="+height+", left="+left+", top="+top;
+		window.open("pw?next="+target+"&no="+no, "check", opt);
+	}
+</script>
+
 <div class="page">
 	<div class="empty-row"></div>
-	<div class="area-100 center line-black">
-		<div class="row center line-red">
+	<div class="area-100 center">
+		<div class="row center">
 			<table class="info-table area-70" border="1">
 				<tr>
 					<th class="title">아이디</th>
@@ -48,8 +61,8 @@
 			<span class="left">
 				<input type="button" class="input-btn" value="목록" onclick="location.href='blist';">
 			</span>
-			<input type="button" class="input-btn" value="수정" onclick="pw?next=edit">
-			<input type="button" class="input-btn" value="삭제" onclick="pw?no=${bdto.no}&next=delete">
+			<input type="button" class="input-btn" value="수정" onclick="checkpw('edit', '${bdto.no}')">
+			<input type="button" class="input-btn" value="삭제" onclick="location.href='pw?no=${bdto.no}&next=delete';">
 		</div>
 	</div>
 </div>
