@@ -150,8 +150,8 @@
 					<input name="phone" type="tel" class="form-control" id="username" placeholder="- 없이 입력해 주세요">
 				</div>
 				<div class="form-group">
-				<input type="text" id="sample4_postcode" placeholder="우편번호" name="post" class="form-control">
 				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-info">
+				<input type="text" id="sample4_postcode" placeholder="우편번호" name="post" class="form-control">
 				<br><div>
 				<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr1" class="form-control"> 
 				<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="addr2" class="form-control"> 

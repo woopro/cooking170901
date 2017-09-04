@@ -43,7 +43,7 @@
 		<div class="row center" style="background-color: rgb(239,239,239)">
 			<h1>문의 글 작성하기</h1>
 		</div>
-		<form action="bwrite" name="write_form" method="post">
+		<form action="bwrite" method="post">
 			<div class="row center">
 				<table class="user-table">
 					<tr>
@@ -62,19 +62,22 @@
 					<tr>
 						<th>아이디</th>
 						<td>
-							<input type="email" class="user-input area-90" name="email" placeholder="아이디" required>
+<!-- 							<input type="email" class="user-input area-90" name="email" placeholder="이메일" required> -->
+							<input type="email" class="user-input area-90" name="email" value="${mdto.email}" readonly>
 						</td>
 					</tr>
 					<tr>
 						<th>이름</th>
 						<td>
-							<input type="text" class="user-input area-90" name="name" placeholder="이름" required>
+<!-- 							<input type="email" class="user-input area-90" name="name" placeholder="이름" required> -->
+							<input type="text" class="user-input area-90" name="name" value="${mdto.name}" readonly>
 						</td>
 					</tr>
 					<tr>
 						<th>이메일</th>
 						<td>
-							<input type="email" class="user-input area-90" name="email" placeholder="이메일" required>
+<!-- 							<input type="email" class="user-input area-90" name="email" placeholder="이메일" required> -->
+							<input type="email" class="user-input area-90" name="email" value="${mdto.email}" readonly>
 						</td>
 					</tr>
 					<tr>

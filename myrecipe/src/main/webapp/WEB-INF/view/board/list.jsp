@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file= "/WEB-INF/view/template/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
 
 <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
-
 
 <script>
 	var preContent;
@@ -20,15 +18,17 @@
 		preContent = curContent;
 	}
 	
-	function search(type, key) {
+	function select(type) {
+		var t = document.querySelector(type);
 		console.log("type = "+type);
-		console.log("key = "+key);
+		return false;
 	}
 </script>
 
 <div class="page center">
 	<br>
 	<div class="empty-row"></div>
+	out.println(${ckValue});
 	<div class="board_nav center">
 		<div style="display: inline;"><span><a href="#q1">자주 묻는 질문(FAQ)</a></span> &nbsp; / &nbsp;</div>
 		<div style="display: inline;"><span><a href="#q2">문의 게시판</a></span></div>
@@ -192,11 +192,11 @@
 			<div class="row align-right" id="check1">
 				<label for="allList" style="font-size: 15px">전체 목록으로</label>
 				<input type="checkbox" id="allList" 
-						onclick="history.back();">
+						onclick="location.href='blist'">
 				&nbsp;&nbsp;
 				<label for="myQnA" style="font-size: 15px">내 게시글만 보기</label>
 				<input type="checkbox" id="myQnA" 
-						onclick="location.href='blist/me?name=aaa';">
+						onclick="location.href='me?email=${ckValue}';">
 			</div>
 			<br>
 			<div class="row align-right">
@@ -241,7 +241,7 @@
 			<!-- 검색창 -->
 			<form action="blist">
 				<div class="row">
-					<select name="type" class="select_box">
+					<select name="type" class="select_box" id="sch">
 						<c:if test="${empty type}">
 							<option value="" selected>선택하세요</option>
 							<option value="title">제목</option>
@@ -275,7 +275,8 @@
 							<input type="search" name="key" class="user-input area-20" value="${key}" required>
 						</c:otherwise>
 					</c:choose>
-					<input type="submit" class="input-btn" value="검색" onclic="search(type, key)">
+					<input type="button" class="input-btn" value="검색" onclick="return select('sch');">
+<!-- 					<input type="submit" class="input-btn" value="검색" onclick="return select('sch');"> -->
 				</div>
 			</form>
 			<div class="empty-row"></div>
