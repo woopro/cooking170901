@@ -14,6 +14,7 @@
 		<script>
 			window.close();
 			console.log(${next});
+			
 		</script>
 	</c:when>
 	<c:otherwise>
