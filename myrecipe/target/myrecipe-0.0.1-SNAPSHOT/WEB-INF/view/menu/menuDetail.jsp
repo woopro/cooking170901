@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file= "/WEB-INF/view/template/header.jsp" %>
-<link rel="stylesheet" type="text/css" href="/recipe/css/main.css">
-
-
 <html>
 <head>
 <title>디자인</title>
@@ -25,7 +21,7 @@
 </head>
 <body>
 	<div align="center">
-		<h1>상품 등록 화면</h1>
+		<h1>상품 상세정보</h1>
 	</div>
 	<div class="item_body">
 		<div align="center">
@@ -33,19 +29,13 @@
 				메뉴 이미지 <br> <img height="250" width="250">
 			</div>
 			<div class="c" align="left">
-				<form id="madd" action="madd" method="POST">
+				<form id="menuAdd" action="menuAdd" method="POST">
 					메뉴 상세 정보<br> 
-					<label>메뉴 명 : </label> 		<input type="text"name="name"> 
+					<label>메뉴 명 : </label> 		<input type="text"name="name" value="${mdto.name}"> 
 					<br> 
-					<label>메뉴 종류 : </label> 
-					<select name="type">
-						<option> 종류 </option>
-						<option value="bob"> 밥류 </option>
-						<option value="stew"> 찌개류 </option>
-						<option value="soup"> 국류 </option>
-					</select> 
+					<label>메뉴 종류 : </label>		<input type="text"name="type" value="${mdto.type}"> 
 					<br> 
-					<label>가격 : </label> 		<input type="number" name="price"> 
+					<label>가격 : </label> 		<input type="number" name="price" value="${mdto.price}"> 
 					<br> 
 					<label>옵션1 :</label> 		<input type="text" name="op1" placeholder="" value="없음"> 
 					<br> 
@@ -90,7 +80,3 @@
 
 </body>
 </html>
-
-
-
-<%@ include file= "/WEB-INF/view/template/footer.jsp" %>

@@ -10,13 +10,15 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import recipe.model.board.BoardDto;
-
 @Repository(value="mdao")
 public class MenuDaoImpl implements MenuDao {
 	private Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	private RowMapper<MenuDto> mapper = (rs, idx)->{
+		return new MenuDto(rs);
+	};
 	
 	@Override
 	public int add(MenuDto mdto) {
@@ -47,12 +49,10 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public List<MenuDto> list() {
-		RowMapper<MenuDto> mapper = (rs, index)->{
-			MenuDto mdto = new MenuDto(rs);
-			return mdto;
-		};
-		return jdbcTemplate.query("select * from menu", mapper);
+	public List<MenuDto> list(String type, String key) {
+		log.info("list sql 실행");
+		String sql = "select * from menu where "+type+" like '%'||?||'%' order by reg desc";
+		return jdbcTemplate.query(sql, new Object[] {key} ,mapper);
 	}
 
 }
