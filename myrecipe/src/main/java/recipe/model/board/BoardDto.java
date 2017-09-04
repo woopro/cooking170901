@@ -106,9 +106,6 @@ public class BoardDto {
 		return reg.substring(11, 19);
 	}
 	public String getAuto() {
-		System.out.println("작성일 = "+getReg());
-		System.out.println("작성일(날짜만) = "+getDate());
-		System.out.println("작성일(시간만) = "+getTime());
 		String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		System.out.println("오늘 날짜 = "+today);
 		if(getDate().equals(today))  	// 작성글이 오늘이면 년월일을 제외한 시간을 표시, 그렇지 않으면 년월일만 표시
