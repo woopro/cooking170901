@@ -20,7 +20,7 @@
                 	<ul>
 	                    <li><a href="${pageContext.request.contextPath}">Home</a></li>
 	                    <li><a href="#">이용방법</a></li>
-	                    <li><a href="${pageContext.request.contextPath}/menu/menulist">메뉴</a></li>
+	                    <li><a href="mlist">메뉴</a></li>
 	                    <li><a href="#">공지사항</a></li>
 	                    <li id="QnA">
 	                    	<a href="<c:url value="blist"/>">고객센터</a>

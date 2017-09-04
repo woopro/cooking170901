@@ -51,13 +51,9 @@
 				<c:forEach var="mdto" items="${mdto}">
 					<a href="mdetail?no=${mdto.menu_no}">
 						<div class="menu_item">
-							<h4>메뉴 명 : 
-							<label>${mdto.name}</label>
-							</h4>
-							<br>
-							<h4>가격 :
-							<label>${mdto.price}</label>
-							</h4>
+							<img src="http://via.placeholder.com/200x110">
+							<h4>메뉴 : <label>${mdto.name}</label></h4>
+							<h4>가격 : <label>${mdto.price}</label></h4>
 						</div>
 					</a>
 				</c:forEach>
@@ -65,10 +61,7 @@
 		</div>
 	</div>
 
-
 </body>
 </html>
-
-
 
 <%@ include file="/WEB-INF/view/template/footer.jsp"%>

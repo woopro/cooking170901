@@ -8,7 +8,7 @@
     <mvc:annotation-driven />
     <mvc:resources location="/resource/css/" mapping="/css/**"/>
 	<mvc:resources location="/resource/image/" mapping="/image/**"/>
-
+	<mvc:resources location="/resource/js/" mapping="/js/**"/>
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	        <property name="prefix" value="/WEB-INF/view/"/>

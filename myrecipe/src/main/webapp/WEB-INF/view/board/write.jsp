@@ -4,7 +4,10 @@
 
 <%@ include file= "/WEB-INF/view/template/header.jsp" %>
 
-<link rel="stylesheet" type="text/css" href="/recipe/css/main.css">
+<link rel="stylesheet" type="text/css" href="/myrecipe/css/main.css">
+ <link rel="stylesheet" type="text/css" href="/myrecipe/css/jquery.cleditor.css">
+ <script type="text/javascript" src="/myrecipe/js/jquery.cleditor.min.js"></script>
+
 
 
 <script>
@@ -12,7 +15,7 @@
 	    var max = 2000;
 	    var length = 0;
 	    var num= 0;
-	    var ta = document.querySelector("textarea");
+	    var ta = document.querySelector("#content");
 	    //console.log(ta.value)
 	    length = ta.value.length;
 	    
@@ -89,7 +92,7 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea rows="10" cols="30" name="detail" style="width:650px; height:350px;" 
+							<textarea rows="10" cols="30" name="detail" id="content"  style="width:650px; height:350px;"
 										onkeydown="input();" onkeyup="input();" class="user-area"></textarea><br>
 							<div id="limit"></div>
 						</td>
