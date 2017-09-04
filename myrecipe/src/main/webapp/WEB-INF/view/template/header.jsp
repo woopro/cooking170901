@@ -32,6 +32,7 @@
 	                    
 	                    <li style="float:right"><a href="login">로그인</a></li>
 	                    <li style="float:right"><a href="sign">회원가입</a></li>
+	                    <li style="float:right"><a href="madd">상품등록</a></li>
 		              </ul>
                 </nav>
             </header>

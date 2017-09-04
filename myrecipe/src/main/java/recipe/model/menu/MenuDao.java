@@ -9,5 +9,5 @@ public interface MenuDao {
 	int add(MenuDto mdto);
 	MenuDto info(int no);
 	List<MenuDto> list(String type, String key);
-	
+	MenuDto delete(int no);
 }

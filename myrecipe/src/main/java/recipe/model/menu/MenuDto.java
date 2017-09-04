@@ -33,7 +33,6 @@ public class MenuDto {
 		this.reg = reg;
 	}
 	public MenuDto(HttpServletRequest req) throws SQLException {
-		log.debug("req 방문");
 		Map<String, String[]> a = req.getParameterMap();
 		for(Map.Entry<String, String[]> entry: a.entrySet()) {
 			log.debug("Key: " + entry.getKey() + "	// Value: " + entry.getValue()[0]);

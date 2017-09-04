@@ -29,19 +29,14 @@ public class MenuController {
 	public String MenuList(HttpServletRequest request, Model model) {
 		String type = request.getParameter("type");
 		String key = request.getParameter("key");
-		
 		model.addAttribute("type", type);
 		model.addAttribute("key", key);
-		
 		if(type==null) type="name";
 		if(key==null) key="";
-		
 		log.debug("type : "+type+" / key : "+key);
-		
 		List<MenuDto> mdto = mdao.list(type, key);
 		model.addAttribute("mdto", mdto);
 		
-		log.debug("리스트 반환 완료");
 		return "menu/menuList";
 	}
 	
@@ -55,7 +50,7 @@ public class MenuController {
 	@RequestMapping(value="madd", method=RequestMethod.POST)
 	public String MenuAdd(HttpServletRequest req) throws SQLException {
 		int no = mdao.add(new MenuDto(req));
-		return "redirect:/mDetail?no="+no;
+		return "redirect:/mdetail?no="+no;
 	}
 	
 	//메뉴 상세정보로 이동
@@ -66,4 +61,10 @@ public class MenuController {
 		return "menu/menuDetail";
 	}
 	
+	//메뉴 삭제 기능 수행
+		@RequestMapping("mdelete")
+		public String MenuDelete(@RequestParam("no") int no, Model model) {
+			MenuDto mdto = mdao.delete(no);
+			return "mlist";
+		}
 }
