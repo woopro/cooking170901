@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface MenuDao {
 	int add(MenuDto mdto);
 	MenuDto info(int no);
-	List<MenuDto> list();
+	List<MenuDto> list(String type, String key);
 	
 }

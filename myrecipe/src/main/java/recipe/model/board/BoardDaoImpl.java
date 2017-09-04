@@ -18,6 +18,10 @@ public class BoardDaoImpl implements BoardDao {
 		return new BoardDto(rs);
 	};
 	
+	private ResultSetExtractor<BoardDto> extractor = (rs)->{
+		return rs.next()?new BoardDto(rs):null;
+	};
+	
 	@Override
 	public int write(BoardDto bdto) {
 		String sql = "select board_seq.nextval from dual";
@@ -32,9 +36,6 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public BoardDto info(int no) {
-		ResultSetExtractor<BoardDto> extractor = (rs)->{
-			return rs.next()?new BoardDto(rs):null;
-		};
 		String sql = "select * from board where board_no = ?";
 		return jdbcTemplate.query(sql, new Object[] {no}, extractor);
 	}
@@ -47,7 +48,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public List<BoardDto> myQnA(String name) {
-		String sql = "select* from board where name= ? order by reg desc";
+		String sql = "select* from board where email= ? order by reg desc";
 		return jdbcTemplate.query(sql, new Object[] {name},mapper);
 	}
 
@@ -56,6 +57,7 @@ public class BoardDaoImpl implements BoardDao {
 		String sql = "select * from board where no = ? and pw = ?";
 		return jdbcTemplate.update(sql, no, pw) > 0;
 	}
+
 
 //	@Override
 //	public List<BoardDto> list(String type, String keyword) {

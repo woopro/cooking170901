@@ -33,7 +33,7 @@
 				메뉴 이미지 <br> <img height="250" width="250">
 			</div>
 			<div class="c" align="left">
-				<form id="menuAdd" action="menuAdd" method="POST">
+				<form id="madd" action="madd" method="POST">
 					메뉴 상세 정보<br> 
 					<label>메뉴 명 : </label> 		<input type="text"name="name"> 
 					<br> 
