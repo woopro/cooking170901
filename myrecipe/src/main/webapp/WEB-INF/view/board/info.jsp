@@ -6,8 +6,6 @@
 
 <script>
 	function checkpw(target, no) {
-		console.log("글 번호  = "+no);
-		console.log("이동 페이지 = "+target);
 		var width = 450;
 		var height = 150;
 		var left = (screen.availWidth-width)/2;
@@ -20,6 +18,9 @@
 <div class="page">
 	<div class="empty-row"></div>
 	<div class="area-100 center">
+		<div class="row center" style="background-color: rgb(239,239,239)">
+			<h1>내 문의 글</h1>
+		</div>
 		<div class="row center">
 			<table class="info-table area-70" border="1">
 				<tr>
@@ -61,8 +62,8 @@
 			<span class="left">
 				<input type="button" class="input-btn" value="목록" onclick="location.href='blist';">
 			</span>
-			<input type="button" class="input-btn" value="수정" onclick="checkpw('edit', '${bdto.no}')">
-			<input type="button" class="input-btn" value="삭제" onclick="location.href='pw?no=${bdto.no}&next=delete';">
+			<input type="button" class="input-btn" value="수정" onclick="checkpw('bedit', '${bdto.no}')">
+			<input type="button" class="input-btn" value="삭제" onclick="location.href='pw?no=${bdto.no}&next=bdelete';">
 		</div>
 	</div>
 </div>

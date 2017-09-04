@@ -347,7 +347,7 @@ a:hover{
 /* 게시판 각 페이지의 버튼이 설정된 div 속성 */
 .btn_area {
 /* 	overflow: hidden; */
-    margin: 20px 0 70px 0;
+    margin: 20px 0px 70px 100px;
     text-align: right;
 }
 

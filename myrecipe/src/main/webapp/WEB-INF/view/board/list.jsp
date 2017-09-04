@@ -23,6 +23,7 @@
 		console.log("type = "+type);
 		return false;
 	}
+	
 </script>
 
 <div class="page center">
@@ -195,7 +196,7 @@
 				&nbsp;&nbsp;
 				<label for="myQnA" style="font-size: 15px">내 게시글만 보기</label>
 				<input type="checkbox" id="myQnA" 
-						onclick="location.href='me?email=${ckValue}';">
+						onclick="location.href='me?email=${ckValue}';" >
 			</div>
 			<br>
 			<div class="row align-right">

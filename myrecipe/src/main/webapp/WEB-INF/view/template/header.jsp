@@ -20,11 +20,8 @@
                 	<ul>
 	                    <li><a href="${pageContext.request.contextPath}">Home</a></li>
 	                    <li><a href="#">이용방법</a></li>
-<<<<<<< HEAD
 	                    <li><a href="mlist">메뉴</a></li>
-=======
 	                    <li><a href="${pageContext.request.contextPath}/mlist">메뉴</a></li>
->>>>>>> branch 'master' of https://github.com/woopro/cooking170901.git
 	                    <li><a href="#">공지사항</a></li>
 	                    <li id="QnA">
 	                    	<a href="<c:url value="blist"/>">고객센터</a>

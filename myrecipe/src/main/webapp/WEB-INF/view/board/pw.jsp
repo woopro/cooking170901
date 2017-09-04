@@ -12,9 +12,8 @@
 	</c:when>
 	<c:when test="${success=='yes'}">
 		<script>
+			location.href='${next}';
 			window.close();
-			console.log(${next});
-			
 		</script>
 	</c:when>
 	<c:otherwise>

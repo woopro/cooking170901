@@ -113,10 +113,8 @@ public class BoardController {
 		String next = request.getParameter("next");
 		String pw = request.getParameter("pw");
 		boolean result = bdao.checkpw(no, pw);
-		log.info("result = "+result);
 		if(result) {
 			model.addAttribute("success", "yes");
-			model.addAttribute("next", next);
 			return "board/pw";
 		}else {
 			model.addAttribute("fail", "yes");
@@ -126,12 +124,12 @@ public class BoardController {
 	
 	@RequestMapping("/bedit")
 	public String edit() {
-		return "board/edit";
+		return "board/bedit";
 	}
 	
 	@RequestMapping("/bdelete")
 	public String delete() {
-		return "board/edit";
+		return "board/bdelete";
 	}
 }
 

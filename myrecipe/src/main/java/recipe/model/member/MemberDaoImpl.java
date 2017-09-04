@@ -29,7 +29,7 @@ public class MemberDaoImpl implements MemberDao {
 	public boolean login(String email,String password) {
 		String origin = jdbcTemplate.queryForObject("select password from member where email=?",String.class, email);
 		return origin.matches(password);
-				}
+	}
 
 	@Override
 	public List<MemberDto> info(String email) {

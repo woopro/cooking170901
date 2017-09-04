@@ -88,14 +88,14 @@ public class MemberController {
    }
    @RequestMapping(value="/login",method=RequestMethod.POST)
    public String Login(HttpServletResponse response,@RequestParam String email, @RequestParam String password,HttpSession session) {
-   log.info("이메일: "+email+"  비밀번호:"+password);   
-   boolean result = memberDaoImpl.login(email, password);
-   if(!result) {log.info("연결 실패 혹은 계정 없음");}else{log.info("로그인 성공"+result);
-   Cookie c = new Cookie("memberEmail",email);
-   c.setComment("회원 이메일");
-   c.setMaxAge(60*60*24);
-   response.addCookie(c);}
-      return "home";
+	   log.info("이메일: "+email+"  비밀번호:"+password);   
+	   boolean result = memberDaoImpl.login(email, password);
+	   if(!result) {log.info("연결 실패 혹은 계정 없음");}else{log.info("로그인 성공"+result);
+	   Cookie c = new Cookie("memberEmail",email);
+	   c.setComment("회원 이메일");
+	   c.setMaxAge(60*60*24);
+	   response.addCookie(c);}
+	   return "home";
    }
    /*로그아웃 컨트롤러*/
    @RequestMapping("/logout")
