@@ -1,13 +1,13 @@
 package recipe.model.member;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 @Repository(value="memberDao") 
-public interface MemberDao {
-	void sign();
-	boolean login();
-	MemberDto info(int no);
-	MemberDto edit(int no);
+public interface MemberDao { 
 	void sign(MemberDto dto);
-	String login(String email, String password);
+	boolean login(String email, String password);
+	boolean edit(MemberDto dto);
+	List<MemberDto> info(String email);
 }

@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 public interface BoardDao {
 	int write(BoardDto bdto);
 	BoardDto info(int no);
-	List<BoardDto> list();
-//	List<BoardDto> list(String type, String keyword);
+	List<BoardDto> list(String type, String key);
+	List<BoardDto> myQnA(String name);
+	boolean checkpw(int no ,String pw);
 //	int count(String key, String type);
 }

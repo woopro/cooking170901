@@ -1,5 +1,7 @@
 package recipe.model.member;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -7,50 +9,43 @@ import org.springframework.stereotype.Repository;
 
 @Repository(value="memberDao") 
 public class MemberDaoImpl implements MemberDao {
-	
+	 
 	@Autowired
-	private static JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 	
 	@Override
 	public void sign(MemberDto dto) {
-		Object[] args = {dto.getEmail(),dto.getPassword(),dto.getPhone(),
+		String sql = "insert into member values("
+				+ "member_seq.nextval,?,?,?,?,?,?,?,0,'일반',sysdate)";
+		Object[] args = {dto.getEmail(),dto.getPassword(),dto.getName(),dto.getPhone(),
 				dto.getPost(),dto.getAddr1(),dto.getAddr2()};
-	
-	String sql = "insert into member values("
-			+ "member_seq.nextval,?,?,?,?,?,?,?,0,'일반',sysdate)";
 	jdbcTemplate.update(sql,args);
 	}
+	private RowMapper<MemberDto> mapper = (rs, index)->{
+		return new MemberDto(rs);
+	};
 
 	@Override
-	public String login(String email,String password) {
-		Object[] logininfo = {email,password};
-		String sql ="select * from member where email=? and password=?";
-		String result = jdbcTemplate.queryForObject(sql,String.class,logininfo);
-		return result;
+	public boolean login(String email,String password) {
+		String origin = jdbcTemplate.queryForObject("select password from member where email=?",String.class, email);
+		return origin.matches(password);
+				}
+
+	@Override
+	public List<MemberDto> info(String email) {
+		RowMapper<MemberDto> mapper = (rs,index)->{
+			MemberDto dto = new MemberDto(rs);
+			return dto;
+		};
+		return jdbcTemplate.query("select * from member where email=?",new Object[] {email},mapper);
 	}
 
 	@Override
-	public MemberDto info(int no) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MemberDto edit(int no) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void sign() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean login() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean edit(MemberDto dto) {
+		String sql = "update member set password=?, name=?, phone=?, post=?, addr1=?, addr2=? where email=?";
+		int res = jdbcTemplate.update(sql,dto.getPassword(),dto.getName(),dto.getPhone(),
+				dto.getPost(),dto.getAddr1(),dto.getAddr2(),dto.getEmail());
+		return res>0;
 	}
 
 }

@@ -20,16 +20,19 @@
 		preContent = curContent;
 	}
 	
+	function search(type, key) {
+		console.log("type = "+type);
+		console.log("key = "+key);
+	}
 </script>
 
-<div class="page center line-red">
+<div class="page center">
 	<br>
-	<div style="border: 1px dotted; width: 400px; height: 2em;" class="center">
+	<div class="empty-row"></div>
+	<div class="board_nav center">
 		<div style="display: inline;"><span><a href="#q1">자주 묻는 질문(FAQ)</a></span> &nbsp; / &nbsp;</div>
 		<div style="display: inline;"><span><a href="#q2">문의 게시판</a></span></div>
 	</div>
-	
-	<div class="empty-row" id="q1"></div>
 	<div class="row area-90 center">
 		<div class="page_header center">
 			<h1>자주 묻는 질문(FAQ)</h1>
@@ -186,11 +189,16 @@
 			<div class="row center">
 				<h1>문의 게시판</h1>
 			</div>
-			<div class="row align-right">
-				<label for="myQnA">내 게시글만 보기</label>
+			<div class="row align-right" id="check1">
+				<label for="allList" style="font-size: 15px">전체 목록으로</label>
+				<input type="checkbox" id="allList" 
+						onclick="history.back();">
+				&nbsp;&nbsp;
+				<label for="myQnA" style="font-size: 15px">내 게시글만 보기</label>
 				<input type="checkbox" id="myQnA" 
-						onclick="location.href='blist';">
+						onclick="location.href='blist/me?name=aaa';">
 			</div>
+			<br>
 			<div class="row align-right">
 				<input type="button" class="input-btn" value="글쓰기" 
 							onclick="location.href='bwrite';">
@@ -212,9 +220,8 @@
 								<td>${list.no}</td>
 								<td align="left">
 									<c:choose>
-										<c:when test="${list.category=='선택하세요'}">
-											<a href="binfo?no=${list.no}"
-											>${list.title}</a>
+										<c:when test="${empty list.category}">
+											<a href="binfo?no=${list.no}">${list.title}</a>
 										</c:when>
 										<c:otherwise>
 											<a href="binfo?no=${list.no}"
@@ -230,19 +237,48 @@
 					</tbody>
 				</table>				
 			</div>
+
 			<!-- 검색창 -->
 			<form action="blist">
 				<div class="row">
 					<select name="type" class="select_box">
-						<option value="">선택하세요</option>
-						<option value="title">제목</option>
-						<option value="name">글쓴이</option>
-						<option value="category">문의유형</option>
+						<c:if test="${empty type}">
+							<option value="" selected>선택하세요</option>
+							<option value="title">제목</option>
+							<option value="name">작성자</option>
+							<option value="category">문의유형</option>
+						</c:if>
+						<c:if test="${type=='title'}">
+							<option value="">선택하세요</option>
+							<option value="title" selected>제목</option>
+							<option value="name">작성자</option>
+							<option value="category">문의유형</option>
+						</c:if>
+						<c:if test="${type=='name'}">
+							<option value="">선택하세요</option>
+							<option value="title">제목</option>
+							<option value="name" selected>작성자</option>
+							<option value="category">문의유형</option>
+						</c:if>
+						<c:if test="${type=='category'}">
+							<option value="">선택하세요</option>
+							<option value="title">제목</option>
+							<option value="name">작성자</option>
+							<option value="category" selected>문의유형</option>
+						</c:if>
 					</select>
-					<input type="search" name="keyword" class="user-input area-20" placeholder="검색어 입력" required>
-					<input type="submit" class="input-btn" value="검색">
+					<c:choose>
+						<c:when test="${empty key}">
+							<input type="search" name="key" class="user-input area-20" placeholder="검색어 입력"required>
+						</c:when>
+						<c:otherwise>
+							<input type="search" name="key" class="user-input area-20" value="${key}" required>
+						</c:otherwise>
+					</c:choose>
+					<input type="submit" class="input-btn" value="검색" onclic="search(type, key)">
 				</div>
 			</form>
+			<div class="empty-row"></div>
 		</div>
 	</div>
 </div>

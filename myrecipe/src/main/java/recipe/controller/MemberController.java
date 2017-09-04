@@ -1,5 +1,13 @@
 package recipe.controller;
 
+import java.util.List;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,49 +18,107 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import recipe.model.member.MemberDaoImpl;
+import recipe.model.member.MemberDto;
 
 @Controller
 public class MemberController {
-	private Logger log = LoggerFactory.getLogger(getClass());
-	@Autowired
-	MemberDaoImpl memberDaoImpl;
-	/*회원 가입 컨트롤러*/
-	@RequestMapping(value="/sign",method=RequestMethod.GET)
-	public String SignPage() {
-		return "member/sign";
-	}
-	@RequestMapping(value="/sign",method=RequestMethod.POST)
-	public String Sign() {
-		
-		return "redirect:/";
-	}
-	/*회원 정보 컨트롤러*/
-	@RequestMapping("/info")
-	public String Info(Model model) {
-		
-		return "member/info";
-	}
-	/*회원 정보 수정 컨트롤러*/
-	@RequestMapping(value="/edit",method=RequestMethod.GET)
-	public String EditPage() {
-		
-		return "member/edit";
-	}
-	@RequestMapping(value="/edit",method=RequestMethod.POST)
-	public String Edit() {
-		
-		return "member/info";
-	}
-	/*로그인 페이지 컨트롤러*/
-	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public String LoginPage() {
-		return "member/login";
-	}
-	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String Login(@RequestParam String email, @RequestParam String password) {
-	log.info("이메일: "+email+"  비밀번호:"+password);	
-	String result = memberDaoImpl.login(email, password);
-	if(result==null) {log.info("연결 실패 혹은 계정 없음");}else{log.info("로그인 성공"+result);}
-		return "/home";
-	}
+   private Logger log = LoggerFactory.getLogger(getClass());
+   @Autowired
+   MemberDaoImpl memberDaoImpl;
+   /*회원 가입 컨트롤러*/
+   @RequestMapping(value="/sign",method=RequestMethod.GET)
+   public String SignPage() {
+      return "member/sign";
+   }
+   @RequestMapping(value="/sign",method=RequestMethod.POST)
+   public String Sign(MemberDto dto) {
+      log.info(dto.toString());
+      memberDaoImpl.sign(dto);
+      return "redirect:/";
+   }
+   /*회원 정보 컨트롤러*/
+   @RequestMapping("/info")
+   public String Info(HttpServletRequest request,Model model) {
+      Cookie[] cookies = request.getCookies();
+      String email = null;
+      if(cookies != null) {
+         for(int i=0;i<cookies.length;i++) {
+            Cookie c = cookies[i];
+            String cName = c.getName();
+            if(cName.equalsIgnoreCase("memberEmail")) {
+               email = c.getValue();
+            }
+         }
+      }
+      log.info(email);
+      List<MemberDto> dto = memberDaoImpl.info(email);
+      model.addAttribute("dto", dto.get(0));
+      log.info(dto.get(0).toString());
+      return "member/info";
+   }
+   /*회원 정보 수정 컨트롤러*/
+   @RequestMapping(value="/edit",method=RequestMethod.GET)
+   public String EditPage(HttpServletRequest request,Model model) {
+      Cookie[] cookies = request.getCookies();
+      String email = null;
+      if(cookies != null) {
+         for(int i=0;i<cookies.length;i++) {
+            Cookie c = cookies[i];
+            String cName = c.getName();
+            if(cName.equalsIgnoreCase("memberEmail")) {
+               email = c.getValue();
+            }
+         }
+      }
+      List<MemberDto> dto = memberDaoImpl.info(email);
+      model.addAttribute("dto", dto.get(0));
+      return "member/edit";
+   }
+   @RequestMapping(value="/edit",method=RequestMethod.POST)
+   public String Edit(MemberDto dto) {
+      boolean result = memberDaoImpl.edit(dto);
+      if(result)log.info("수정 완료");
+      else log.info("수정 실패");
+      return "redirect:/info";
+   }
+   /*로그인 페이지 컨트롤러*/
+   @RequestMapping(value="/login",method=RequestMethod.GET)
+   public String LoginPage() {
+      return "member/login";
+   }
+   @RequestMapping(value="/login",method=RequestMethod.POST)
+   public String Login(HttpServletResponse response,@RequestParam String email, @RequestParam String password,HttpSession session) {
+   log.info("이메일: "+email+"  비밀번호:"+password);   
+   boolean result = memberDaoImpl.login(email, password);
+   if(!result) {log.info("연결 실패 혹은 계정 없음");}else{log.info("로그인 성공"+result);
+   Cookie c = new Cookie("memberEmail",email);
+   c.setComment("회원 이메일");
+   c.setMaxAge(60*60*24);
+   response.addCookie(c);}
+      return "home";
+   }
+   /*로그아웃 컨트롤러*/
+   @RequestMapping("/logout")
+   public String Logout(HttpServletResponse response) {
+      // 전체 쿠키 삭제하기
+/*       Cookie[] cookies = request.getCookies() ;
+        
+       if(cookies != null){
+           for(int i=0; i < cookies.length; i++){
+                
+               // 쿠키의 유효시간을 0으로 설정하여 만료시킨다
+               cookies[i].setMaxAge(0) ;
+                
+               // 응답 헤더에 추가한다
+               response.addCookie(cookies[i]) ;
+           }
+       }
+        */
+       // 특정 쿠키만 삭제하기
+       Cookie kc = new Cookie("memberEmail", null) ;
+       kc.setMaxAge(0) ;
+       response.addCookie(kc) ;
+
+      return "home";
+   }
 }

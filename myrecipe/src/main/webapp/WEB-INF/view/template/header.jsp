@@ -5,7 +5,6 @@
 <html>
     <head>
         <title>My Cooking</title>
-        <meta content-type="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
    		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/order.css">
     	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/write.css">

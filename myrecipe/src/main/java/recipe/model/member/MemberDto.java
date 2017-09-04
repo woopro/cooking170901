@@ -4,9 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MemberDto { 
-	private int no;
+	private int no; 
 	private String email;
 	private String password;
+	private String name;
 	private int phone;
 	private int post;
 	private String addr1;
@@ -21,6 +22,7 @@ public class MemberDto {
 		setNo(rs.getInt("no"));
 		setEmail(rs.getString("email"));
 		setPassword(rs.getString("password"));
+		setName(rs.getString("name"));
 		setPhone(rs.getInt("phone"));
 		setPost(rs.getInt("post"));
 		setAddr1(rs.getString("addr1"));
@@ -28,6 +30,22 @@ public class MemberDto {
 		setMile(rs.getInt("mile"));
 		setAuth(rs.getString("auth"));
 		setReg(rs.getString("reg"));
+	}
+	
+	public MemberDto(int no, String email, String password, String name, int phone, int post, String addr1,
+			String addr2, int mile, String auth, String reg) {
+		super();
+		this.no = no;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+		this.post = post;
+		this.addr1 = addr1;
+		this.addr2 = addr2;
+		this.mile = mile;
+		this.auth = auth;
+		this.reg = reg;
 	}
 	public int getNo() {
 		return no;
@@ -46,6 +64,13 @@ public class MemberDto {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getPhone() {
 		return phone;

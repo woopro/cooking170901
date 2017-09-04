@@ -8,6 +8,7 @@
    	margin:0px auto;
 }
 header, main, footer{
+	border-radius: 10px;
     border:1px solid black;
     padding:30px;
 }
@@ -15,8 +16,9 @@ header{
     min-height: 100px;
 }
 main{
-    min-height:600px;
+    min-height:700px;
     text-align: center;
+    padding: 0;
 }
 footer{
     min-height:100px;
@@ -123,25 +125,25 @@ li a:hover {
 	height: 40px;
 }
 /* 버튼 설정 */
-.input-btn, .input-btn-negative{
-    padding:10px;
-    font-size:20px;
-    background-color: rgb(208, 255, 255);
-    color:black;
-}
-.input-btn:hover{
-    background-color: rgb(200, 193, 253);
-}
-.input-btn-negative{
-    background-color: orangered !important;
-}
-.input-btn-negative:hover{
-    background-color: red !important;
-}
+/* .input-btn, .input-btn-negative{ */
+/*     padding:10px; */
+/*     font-size:20px; */
+/*     background-color: rgb(208, 255, 255); */
+/*     color:black; */
+/* } */
+/* .input-btn:hover{ */
+/*     background-color: rgb(200, 193, 253); */
+/* } */
+/* .input-btn-negative{ */
+/*     background-color: orangered !important; */
+/* } */
+/* .input-btn-negative:hover{ */
+/*     background-color: red !important; */
+/* } */
 
 .row{
     display: block;
-    margin: 0px 0px;
+/*     margin: 0px 0px; */
 }
 .center{
     margin:0px auto;
@@ -178,9 +180,10 @@ li a:hover {
     padding: 10px;
 }
 
+
 .user-table .title{
-    width:45%;
-    text-align: left;
+    width:50%;
+    text-align: center;
 }
 
 .user-table .detail{
@@ -195,6 +198,33 @@ li a:hover {
 .user-table .right{
     text-align: right;
 }
+
+
+/* info 페이지 테이블 */
+.info-table{
+    border-collapse: collapse;
+    margin: 40px auto;
+}
+
+.info-table .title {
+	width:30%;
+    text-align: center;
+}
+
+.info-table .detail {
+	height: 250px;
+    vertical-align: top;
+}
+
+.info-table tr td {
+	width: 100%;
+}
+
+.info-table th, .info-table td{
+    font-size: 20px;
+    padding: 10px;
+}
+
 
 /* 게시판 페이징 전용 스타일 */
 .paging-wrap{
@@ -254,17 +284,29 @@ a:hover{
     text-align: center;
 }
 
+/* list 페이지 맨 위 div속성 */
+.board_nav {
+/* 	border: 1px dotted;  */
+	width: 600px; 
+	height: 2em;
+	background-color: rgba(255,232,244,0.5);
+	vertical-align: middle;
+	line-height: 30px;
+}
+
 .list_head {
 	margin-left: 0px;
 	width: 1000px;
 	padding: 10px;
 	text-align: center;
 	cursor: pointer;
+	vertical-align: middle;
 }
 
 .list_no {
 	width: 10%;
     display: inline-block;
+    font-size: 20px;
 }
 
 .content_head {
@@ -286,7 +328,6 @@ a:hover{
 }
 
 
-
 .contents_wrapper {
 	border-top: 2px solid red;
     border-bottom: 1px solid;
@@ -303,28 +344,42 @@ a:hover{
 	margin-left: 100px;
 }
 
+/* 게시판 각 페이지의 버튼이 설정된 div 속성 */
 .btn_area {
 /* 	overflow: hidden; */
-    margin: 20px 0 50px;
+    margin: 20px 0 70px 0;
     text-align: right;
 }
 
 .left {
     float: left;
+    margin-left : 50px;
 }
 
-.btn {
+.input-btn {
+	width: 80px;
+	height: 50px;
 	display: inline-block;
-    padding: 4px 10px;
-    margin: 0 1px;
+    padding: 5px;
     border-radius: 2px;
     border: 1px solid #ddd;
-    color: #888;
-/*     vertical-align: middle; */
+    color: graytext;
     text-decoration: none;
     line-height: normal;
 }
 
+
+
+/* list 페이지에서 체크박스와 라벨의 높이 맞추는 속성*/
+input[id="myQnA"] {
+	position: relative;
+	top: 2px;
+}
+
+input[type="checkbox"] {
+	position: relative;
+	top: 2px;
+}
 
 /* 맨위로 가기 버튼 */
 a.jcm-top {

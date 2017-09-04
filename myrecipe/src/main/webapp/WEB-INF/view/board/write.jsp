@@ -39,18 +39,18 @@
 </script>
 
 <div class="page" align="center">
-	<div class="area-100" align="center">
-		<div class="row" align="center">
+	<div class="area-100 center">
+		<div class="row center" style="background-color: rgb(239,239,239)">
 			<h1>문의 글 작성하기</h1>
 		</div>
 		<form action="bwrite" name="write_form" method="post">
-			<div class="row" align="center">
+			<div class="row center">
 				<table class="user-table">
 					<tr>
 						<th>질문유형</th>
 						<td>
 							<select name="category" class="select_box area-30">
-								<option>선택하세요</option>
+								<option value="">선택하세요</option>
 								<option>배송지연/불만</option>
 								<option>반품문의</option>
 								<option>환불문의</option>
@@ -62,13 +62,13 @@
 					<tr>
 						<th>아이디</th>
 						<td>
-							<input type="email" class="user-input area-90" name="email" placeholder="아이디">
+							<input type="email" class="user-input area-90" name="email" placeholder="아이디" required>
 						</td>
 					</tr>
 					<tr>
 						<th>이름</th>
 						<td>
-							<input type="text" class="user-input area-90" name="name" placeholder="이름">
+							<input type="text" class="user-input area-90" name="name" placeholder="이름" required>
 						</td>
 					</tr>
 					<tr>
@@ -98,13 +98,13 @@
 						</td>
 					</tr>
 				</table>
-				<div class="btn_area">
-					<span class="left">
-						<a href="#" class="btn" onclick="history.back();">목록</a>
-					</span>
-					<a href="javascript:write_form.submit();">등록</a>
-					<a href="bwrite" class="btn">취소</a>
-				</div>
+			</div>
+			<div class="btn_area area-70 center">
+				<span class="left">
+					<input type="button" class="input-btn" value="목록" onclick="history.back();">
+				</span>
+				<input type="submit" class="input-btn" value="등록">
+				<input type="reset" class="input-btn" value="취소">
 			</div>
 		</form>
 	</div>

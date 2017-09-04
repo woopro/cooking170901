@@ -14,6 +14,10 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	private RowMapper<BoardDto> mapper = (rs, idx)->{
+		return new BoardDto(rs);
+	};
+	
 	@Override
 	public int write(BoardDto bdto) {
 		String sql = "select board_seq.nextval from dual";
@@ -36,14 +40,21 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<BoardDto> list() {
-		RowMapper<BoardDto> mapper = (rs, idx)->{
-			return new BoardDto(rs);
-		};
-		
-		String sql = "select * from board order by board_no desc";
-		List<BoardDto> list = jdbcTemplate.query(sql, mapper);
-		return list;
+	public List<BoardDto> list(String type, String key) {
+		String sql = "select * from board where "+type+" like '%'||?||'%' order by reg desc";
+		return jdbcTemplate.query(sql, new Object[] {key} ,mapper);
+	}
+
+	@Override
+	public List<BoardDto> myQnA(String name) {
+		String sql = "select* from board where name= ? order by reg desc";
+		return jdbcTemplate.query(sql, new Object[] {name},mapper);
+	}
+
+	@Override
+	public boolean checkpw(int no, String pw) {
+		String sql = "select * from board where no = ? and pw = ?";
+		return jdbcTemplate.update(sql, no, pw) > 0;
 	}
 
 //	@Override
