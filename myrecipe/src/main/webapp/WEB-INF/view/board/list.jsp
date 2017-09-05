@@ -18,11 +18,15 @@
 		preContent = curContent;
 	}
 	
-// 	function select(type) {
-// 		var t = document.querySelector(type);
-// 		console.log("type = "+type);
-// 		return false;
-// 	}
+	function checkname(id1, id2) {
+		if(id1 == id2) {
+			return true;
+		} else {
+			alert("비밀글은 작성자만 볼 수 있습니다.");
+			return false;
+		}
+	}
+	
 	
 </script>
 
@@ -219,13 +223,14 @@
 							<tr>
 								<td>${list.no}</td>
 								<td align="left">
+									<img src="${pageContext.request.contextPath}/image/board_lock.png" width="30", height="30">
 									<c:choose>
 										<c:when test="${empty list.category}">
-											<a href="binfo?no=${list.no}">${list.title}</a>
+											<a href="binfo?no=${list.no}" onclick="return checkname('${list.email}', '${ckValue}');">${list.title}</a>
 										</c:when>
 										<c:otherwise>
 											<a href="binfo?no=${list.no}"
-											>[${list.category}] ${list.title}</a>
+											onclick="return checkname('${list.email}', '${ckValue}');">[${list.category}] ${list.title}</a>
 										</c:otherwise>
 									</c:choose>
 								</td>

@@ -5,17 +5,6 @@
 <%@ include file= "/WEB-INF/view/template/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
 
-<script>
-	function checkpw(next, no) {
-		var width = 450;
-		var height = 150;
-		var left = (screen.availWidth-width)/2;
-		var top = (screen.availHeight-height)/2;
-		var opt = "width="+width+", height="+height+", left="+left+", top="+top;
-		window.open("pw?next="+next+"&no="+no, "check", opt);
-	}
-</script>
-
 <div class="page">
 	<div class="empty-row"></div>
 	<div class="area-100 center">
@@ -63,8 +52,8 @@
 			<span class="left">
 				<input type="button" class="input-btn" value="목록" onclick="location.href='blist';">
 			</span>
-			<input type="button" class="input-btn" value="수정" onclick="checkpw('bedit', '${bdto.no}')">
-			<input type="button" class="input-btn" value="삭제" onclick="location.href='pw?no=${bdto.no}&next=bdelete';">
+			<input type="button" class="input-btn" value="수정" onclick="bedit">
+			<input type="button" class="input-btn" value="삭제" onclick="bdelete">
 		</div>
 	</div>
 </div>
