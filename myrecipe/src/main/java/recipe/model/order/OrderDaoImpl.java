@@ -19,7 +19,7 @@ public class OrderDaoImpl implements OrderDao{
 	
 	@Override
 	public boolean order(Order order) {
-		String sql = "insert into menu_order values (?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?)";
+		String sql = "insert into order values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		int result = jdbcTemplate.update(sql, mapper);
 		return result>0;

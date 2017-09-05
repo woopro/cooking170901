@@ -20,14 +20,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import recipe.model.member.MemberDaoImpl;
 import recipe.model.member.MemberDto;
 
+
 @Controller
 public class MemberController {
    private Logger log = LoggerFactory.getLogger(getClass());
    @Autowired
    MemberDaoImpl memberDaoImpl;
    /*회원 가입 컨트롤러*/
-   @RequestMapping(value="/sign",method=RequestMethod.GET)
-   public String SignPage() {
+   @RequestMapping(value="/signcheck",method=RequestMethod.POST)
+   public String SignPage(@RequestParam String email,@RequestParam String name,Model model) {
+	   log.info("이메일:"+email+"이름:"+name);
+	   boolean res = memberDaoImpl.signcheck(email,name);
+	   if(res)return "redirect:/login";
+	   model.addAttribute("email", email);
+	   model.addAttribute("name", name);
       return "member/sign";
    }
    @RequestMapping(value="/sign",method=RequestMethod.POST)
@@ -50,11 +56,12 @@ public class MemberController {
             }
          }
       }
+      if(email==null) {return "member/login";}else {
       log.info(email);
       List<MemberDto> dto = memberDaoImpl.info(email);
       model.addAttribute("dto", dto.get(0));
       log.info(dto.get(0).toString());
-      return "member/info";
+      return "member/info";}
    }
    /*회원 정보 수정 컨트롤러*/
    @RequestMapping(value="/edit",method=RequestMethod.GET)
@@ -88,14 +95,14 @@ public class MemberController {
    }
    @RequestMapping(value="/login",method=RequestMethod.POST)
    public String Login(HttpServletResponse response,@RequestParam String email, @RequestParam String password,HttpSession session) {
-	   log.info("이메일: "+email+"  비밀번호:"+password);   
-	   boolean result = memberDaoImpl.login(email, password);
-	   if(!result) {log.info("연결 실패 혹은 계정 없음");}else{log.info("로그인 성공"+result);
-	   Cookie c = new Cookie("memberEmail",email);
-	   c.setComment("회원 이메일");
-	   c.setMaxAge(60*60*24);
-	   response.addCookie(c);}
-	   return "home";
+   log.info("이메일: "+email+"  비밀번호:"+password);   
+   boolean result = memberDaoImpl.login(email, password);
+   if(!result) {log.info("연결 실패 혹은 계정 없음");}else{log.info("로그인 성공"+result);
+   Cookie c = new Cookie("memberEmail",email);
+   c.setComment("회원 이메일");
+   c.setMaxAge(60*60*24);
+   response.addCookie(c);}
+      return "home";
    }
    /*로그아웃 컨트롤러*/
    @RequestMapping("/logout")
@@ -121,4 +128,15 @@ public class MemberController {
 
       return "home";
    }
+   @RequestMapping("tac")
+   public String Check() {
+      return "member/tac";
+   }
+   @RequestMapping("list")
+   public String List(Model model) {
+	   List<MemberDto> list = memberDaoImpl.list();
+	   model.addAttribute("memberlist",list);
+	   return "member/memberlist";
+   }
+   
 }

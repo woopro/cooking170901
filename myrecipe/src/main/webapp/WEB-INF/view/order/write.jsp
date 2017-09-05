@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/view/template/header.jsp"%>
-
-
-    	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/write.css">
 <form action="write" method="post">
 	<div class="order-header">
 		<div class="order-title">주문서 작성</div>
@@ -35,25 +32,23 @@
 	<div class="order-header-line"></div>
 
 	<!-- 주문정보 입력  -> 기존 정보에서 가져옴-->
-	<input type="hidden" name="no_member" value="${memberInfo.no }">
-	<input type="hidden" name="menu_cnt" value="${menu_cnt}">
 	<div class="order-info">주문자 정보</div>
 	<table class="orderinfo">
 		<tr>
 			<td class="info-label">주문하시는 분</td>
-			<td><input type="text" placeholder="${memberInfo.name }" readonly></td>
+			<td><input type="text" name="name" placeholder="주문하시는 분"></td>
 		</tr>
 		<tr>
 			<td class="info-label">주소</td>
-			<td><input type="text" placeholder="${memberInfo.addr1 }" readonly></td>
+			<td><input type="text" name="address" readonly></td>
 		</tr>
 		<tr>
 			<td class="info-label">핸드폰 번호</td>
-			<td><input type="tel" placeholder="${memberInfo.phone }" readonly></td>
+			<td><input type="tel" name="phon"></td>
 		</tr>
 		<tr>
 			<td class="info-label">이메일</td>
-			<td><input type="email" placeholder="${memberInfo.email }" readonly></td>
+			<td><input type="email" name="email"></td>
 		</tr>
 	</table>
 
@@ -64,31 +59,31 @@
 	<table class="orderinfo">
 		<tr>
 			<td class="info-label">배송지 선택</td>
-			<td><input type="radio" name="d_choice" value="normal">기본배송지
-			<input type="radio" name="d_choice" value="recent">최근배송지</td>
+			<td><input type="checkbox" name="normal">기본배송지 <input
+				type="checkbox" name="recent">최근배송지</td>
 		</tr>
 		<tr>
 			<td class="info-label">받으실 분</td>
-			<td><input type="text" name="name" required></td>
+			<td><input type="text" name="address"></td>
 		</tr>
 		<tr>
 			<td class="info-label">받으실 곳</td>
-			<td><input type="text" name="post" id="post" placeholder="우편번호" required>
-			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" name="addr1" id="addr1" placeholder="주소"> <input
-				type="text" name="addr2" id="addr2" placeholder="상세주소"></td>
+			<td><input type="text" id="post" placeholder="우편번호"> <input
+				type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" id="addr1" placeholder="주소"> <input
+				type="text" id="addr2" placeholder="상세주소"></td>
 		</tr>
 		<tr>
 			<td class="info-label">연락처</td>
-			<td><input type="tel" name="tel" required></td>
+			<td><input type="tel" name="phon"></td>
 		</tr>
 		<tr>
 			<td class="info-label">배송일 선택</td>
-			<td><input type="date" name="want_date" required></td>
+			<td><input type="date" name="want_date"></td>
 		</tr>
 		<tr>
 			<td class="info-label">남기실 말씀</td>
-			<td><input type="text" name="comments"></td>
+			<td><input type="text" name="comment"></td>
 		</tr>
 	</table>
 
@@ -117,10 +112,8 @@
 	<table class="orderinfo">
 		<tr>
 			<td>일반결제</td>
-			<td><input type="radio" name="payment" value="creditcard">신용카드
-			<input type="radio" name="payment" value="account">계좌이체
-			<input type="radio" name="payment" value="phone">핸드폰
-			<input type="radio" name="payment" value="noaccount">무통장입금
+			<td><input type="checkbox">신용카드 <input type="checkbox">계좌이체
+				<input type="checkbox">핸드폰 <input type="checkbox">무통장입금
 			</td>
 		</tr>
 	</table>

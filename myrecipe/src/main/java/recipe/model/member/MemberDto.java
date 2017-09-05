@@ -15,6 +15,7 @@ public class MemberDto {
 	private int mile;
 	private String auth;
 	private String reg;
+	private String telecom;
 	
 	public MemberDto() {
 	}
@@ -30,10 +31,11 @@ public class MemberDto {
 		setMile(rs.getInt("mile"));
 		setAuth(rs.getString("auth"));
 		setReg(rs.getString("reg"));
+		setTelecom(rs.getString("telecom"));
 	}
 	
 	public MemberDto(int no, String email, String password, String name, int phone, int post, String addr1,
-			String addr2, int mile, String auth, String reg) {
+			String addr2, int mile, String auth, String reg,String telecom) {
 		super();
 		this.no = no;
 		this.email = email;
@@ -46,6 +48,13 @@ public class MemberDto {
 		this.mile = mile;
 		this.auth = auth;
 		this.reg = reg;
+	}
+	
+	public String getTelecom() {
+		return telecom;
+	}
+	public void setTelecom(String telecom) {
+		this.telecom = telecom;
 	}
 	public int getNo() {
 		return no;

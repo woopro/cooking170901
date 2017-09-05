@@ -173,11 +173,14 @@ li a:hover {
 .user-table{
     border-collapse: collapse;
     margin: 40px auto;
+    border-top: 1px thin;
+    border-bottom: 1px thin;
 }
 
 .user-table th, .user-table td{
     font-size: 20px;
     padding: 10px;
+    border-bottom: 1px thin;
 }
 
 
@@ -327,7 +330,6 @@ a:hover{
 /*     text-align: left; */
 }
 
-
 .contents_wrapper {
 	border-top: 2px solid red;
     border-bottom: 1px solid;
@@ -347,7 +349,7 @@ a:hover{
 /* 게시판 각 페이지의 버튼이 설정된 div 속성 */
 .btn_area {
 /* 	overflow: hidden; */
-    margin: 20px 0px 70px 100px;
+    margin: 20px 0px 70px 50px;
     text-align: right;
 }
 
@@ -369,7 +371,6 @@ a:hover{
 }
 
 
-
 /* list 페이지에서 체크박스와 라벨의 높이 맞추는 속성*/
 input[id="myQnA"] {
 	position: relative;
@@ -380,6 +381,16 @@ input[type="checkbox"] {
 	position: relative;
 	top: 2px;
 }
+
+
+/* 질문 유형별로 검색 div 속성*/
+.q_nav {
+	display:inline;
+	margin-left: 10px;
+	font-size: 20px;
+}
+
+
 
 /* 맨위로 가기 버튼 */
 a.jcm-top {
@@ -398,3 +409,4 @@ a.jcm-top {
     display: none;
 }
 a.jcm-top:hover{background-color:#000}
+

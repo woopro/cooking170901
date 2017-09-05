@@ -10,4 +10,6 @@ public interface MemberDao {
 	boolean login(String email, String password);
 	boolean edit(MemberDto dto);
 	List<MemberDto> info(String email);
+	boolean signcheck(String email,String name);
+	List<MemberDto> list();
 }

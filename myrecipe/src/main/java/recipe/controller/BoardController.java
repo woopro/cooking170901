@@ -47,14 +47,50 @@ public class BoardController {
 		}
 		String type = request.getParameter("type");
 		String key = request.getParameter("key");
+//		log.info("type = "+type);
+//		log.info("key = "+key);
+		String pageStr = request.getParameter("page");
+		int pageNo;
+		try {
+			pageNo = Integer.parseInt(pageStr);
+			if(pageNo <= 0) throw new Exception();
+		}catch(Exception e) {
+			pageNo=1;
+		}
+		
+		int boardSize = 10;
+		int boardCount = bdao.count(type, key);
+		
+//		System.out.println("boardCount = "+boardCount);
+		int start = boardSize * pageNo - boardSize+1;
+		int end = start+boardSize-1;
+		if(end > boardCount) end = boardCount;
+		
+		
+		List<BoardDto> list = bdao.list(type, key, start, end);
+		
+		
+		int blockSize = 10;
+		int blockTotal = (boardCount + boardSize -1)/boardSize;
+		int startBlock = (pageNo -1) / blockSize * blockSize+1;
+		int endBlock = startBlock + blockSize -1;
+		if(endBlock > blockTotal) endBlock = blockTotal;
+		
+		String url = "blist?";
+		if(type!=null && key!=null) 
+			url += "type="+type+"&key="+key;
 		
 		model.addAttribute("type", type);
 		model.addAttribute("key", key);
+		model.addAttribute("url", url);
+		model.addAttribute("startBlock", startBlock);
+		model.addAttribute("endBlock", endBlock);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("blockTotal", blockTotal);
 		
-		if(type==null) type="name";
-		if(key==null) key="";
+//		if(type==null) type="name";
+//		if(key==null) key="";
 		
-		List<BoardDto> list = bdao.list(type, key);
 		model.addAttribute("list", list);
 		return "board/list";
 	}
@@ -93,46 +129,33 @@ public class BoardController {
 	
 	@RequestMapping("/binfo")
 	public String info(@RequestParam("no") int no, Model model) {
+		bdao.read(no);
 		BoardDto bdto = bdao.info(no);
 		model.addAttribute("bdto", bdto);
 		model.addAttribute("pw", bdto.getPw());
 		return "board/info";
 	}
 	
-
-	@RequestMapping("/pw")
-	public String checkpw(@RequestParam("next") String next, 
-						  @RequestParam("no") int no, Model model) {
-		model.addAttribute("next", next);
-		model.addAttribute("no", no);
-		model.addAttribute("fail", "no");
-		return "board/pw";
-	}
-	
-	@RequestMapping(value="/pw", method=RequestMethod.POST)
-	public String checkPw(HttpServletRequest request, Model model) {
-		int no = Integer.parseInt(request.getParameter("board_no"));
-		String next = request.getParameter("next");
-		String pw = request.getParameter("pw");
-		boolean result = bdao.checkpw(no, pw);
-		if(result) {
-			model.addAttribute("success", "yes");
-			model.addAttribute("next", next);
-			return "board/pw";
-		}else {
-			model.addAttribute("fail", "yes");
-			return "redirect:/pw?next="+next+"&no="+no;
-		}
-	}
-	
 	@RequestMapping("/bedit")
-	public String edit() {
+	public String edit(@RequestParam("no") int no,
+					   Model model) {
+		BoardDto bdto = bdao.info(no);
+		model.addAttribute("bdto", bdto);
+		model.addAttribute("no", no);
 		return "board/bedit";
 	}
 	
+	@RequestMapping(value="/bedit", method=RequestMethod.POST)
+	public String edit(HttpServletRequest request,
+					   @RequestParam("board_no") int num) {
+		int no = bdao.edit(new BoardDto(request));
+		return "redirect:binfo?no="+no;
+	}
+	
 	@RequestMapping("/bdelete")
-	public String delete() {
-		return "board/bdelete";
+	public String delete(@RequestParam("no") int no, Model model) {
+		bdao.delete(no);
+		return "redirect:/blist";
 	}
 }
 

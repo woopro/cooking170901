@@ -50,10 +50,11 @@
 		</div>
 		<div class="btn_area area-70 center">
 			<span class="left">
-				<input type="button" class="input-btn" value="목록" onclick="location.href='blist';">
+				<input type="button" class="input-btn" value="목록" onclick="location.href='blist#q2';">
+				<input type="button" class="input-btn" value="답글">
 			</span>
-			<input type="button" class="input-btn" value="수정" onclick="bedit">
-			<input type="button" class="input-btn" value="삭제" onclick="bdelete">
+			<input type="button" class="input-btn" value="수정" onclick="location.href='bedit?no=${bdto.no}';">
+			<input type="button" class="input-btn" value="삭제" onclick="location.href='bdelete?no=${bdto.no}';">
 		</div>
 	</div>
 </div>

@@ -6,8 +6,6 @@ import java.sql.SQLException;
 public class Order {
 	private int no_member;
 	private int no_menu;
-	private String name;//받는 사람
-	private String tel;//연락처
 	private int menu_cnt;
 	private int op1_cnt;
 	private int op2_cnt;
@@ -17,30 +15,8 @@ public class Order {
 	private String addr2;
 	private String order_date;
 	private String want_date;
-	private String real_date;//실제 배송일자
+	private String real_date;
 	private String stat;
-	private String comments;
-	
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-	
-	public String getComments() {
-		return comments;
-	}
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
 	public int getNo_member() {
 		return no_member;
 	}
@@ -125,8 +101,6 @@ public class Order {
 	public Order(ResultSet rs) throws SQLException {
 		setNo_member(rs.getInt("no_member"));
 		setNo_menu(rs.getInt("no_menu"));
-		setName(rs.getString("name"));
-		setTel(rs.getString("tel"));
 		setMenu_cnt(rs.getInt("menu_cnt"));
 		setOp1_cnt(rs.getInt("op1_cnt"));
 		setOp2_cnt(rs.getInt("op2_cnt"));
@@ -138,16 +112,6 @@ public class Order {
 		setWant_date(rs.getString("want_date"));
 		setReal_date(rs.getString("real_date"));
 		setStat(rs.getString("stat"));
-		setComments(rs.getString("comments"));
 	}
-	@Override
-	public String toString() {
-		return "Order [no_member=" + no_member + ", no_menu=" + no_menu + ", name=" + name + ", tel=" + tel
-				+ ", menu_cnt=" + menu_cnt + ", op1_cnt=" + op1_cnt + ", op2_cnt=" + op2_cnt + ", op3_cnt=" + op3_cnt
-				+ ", post=" + post + ", addr1=" + addr1 + ", addr2=" + addr2 + ", order_date=" + order_date
-				+ ", want_date=" + want_date + ", real_date=" + real_date + ", stat=" + stat + ", comments=" + comments
-				+ "]";
-	}
-	
 	
 }

@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/view/template/header.jsp"%>
-
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/order.css">
-
-
 <h1>주문하기 테스트</h1>
 <div class="page">
 	<form action="order" method="post">
