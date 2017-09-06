@@ -2,6 +2,7 @@ package recipe.controller;
 
 import java.io.File;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.List;
 
@@ -141,7 +142,7 @@ public class BoardController {
 	public String write(MultipartHttpServletRequest request) throws Exception {
 		MultipartFile file = request.getFile("file");
 		String title = file.getOriginalFilename();
-		title = title.substring(0, title.indexOf("."));
+//		title = title.substring(0, title.indexOf("."));
 		long size = file.getSize();
 //		log.debug("업도르할 파일 이름  = "+title);
 //		log.debug("파일 크기 = "+size);
@@ -200,10 +201,11 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping("/download/{filename}")
+	@RequestMapping("/download/{filename:.+}")
 	public void download(@PathVariable String filename,
 					HttpServletRequest request,
 					HttpServletResponse response) throws Exception { 
+		String sendName = URLEncoder.encode(filename, "UTF-8").replace("+", "%20").replace("%25","%");
 		
 		String save = request.getServletContext().getRealPath("/file/"+request.getParameter("name"));
 		log.debug("다운 로드 받을 filename = "+filename);

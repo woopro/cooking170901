@@ -24,7 +24,6 @@
 				$("#preview").remove();
 				toggle = false;
 			}
-			
 		});
 	});	
 </script>
@@ -67,8 +66,8 @@
 					<td class="detail">${bdto.detail2}</td>			
 				</tr>
 				<tr>
-					<th clss="title">업로드 파일</th>
-					<td id="prev">
+					<th clss="title" id="prev" >업로드 파일</th>
+					<td>
 						<c:choose>
 							<c:when test="${empty bdto.filename}">
 								업로드된 파일 없음

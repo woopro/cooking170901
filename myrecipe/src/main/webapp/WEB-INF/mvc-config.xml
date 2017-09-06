@@ -11,7 +11,6 @@
 	<mvc:resources location="/resource/image/" mapping="/image/**" />
 	<mvc:resources location="/resource/js/" mapping="/js/**" />
 	<mvc:resources location="/file/" mapping="/file/**"/>
-	
 	<mvc:resources location="/resource/jquery.tablesorter/" mapping="/jquery.tablesorter/**" />
 	
 	<bean
