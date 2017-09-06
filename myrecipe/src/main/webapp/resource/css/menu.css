@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+/* 새로 영역 비율 설정 */
+.height-100{ height: 100%; }
+.height-90{ height: 90%; }
+.height-80{ height: 80%; }
+.height-70{ height: 70%; }
+.height-60{ height: 60%; }
+.height-50{ height: 50%; }
+.height-40{ height: 40%; }
+.height-30{ height: 30%; }
+.height-20{ height: 20%; }
+.height-10{ height: 10%; }
+
+.height-400p{ height: 400px; }
+.height-350p{ height: 350px; }
+.height-300p{ height: 300px; }
+.height-250p{ height: 250px; }
+.height-200p{ height: 200px; }
+.height-150p{ height: 150px; }
+.height-100p{ height: 100px; }
+.height-50p{ height: 50px; }
+
+/* 가로 영역 비율 설정 */
+.width-100{ width: 100%; }
+.width-90{ width: 90%; }
+.width-80{ width: 80%; }
+.width-70{ width: 70%; }
+.width-60{ width: 60%; }
+.width-50{ width: 50%; }
+.width-40{ width: 40%; }
+.width-30{ width: 30%; }
+.width-20{ width: 20%; }
+.width-10{ width: 10%; }
+
+.width-400p{ width: 400px; }
+.width-350p{ width: 350px; }
+.width-300p{ width: 300px; }
+.width-250p{ width: 250px; }
+.width-200p{ width: 200px; }
+.width-150p{ width: 150px; }
+.width-100p{ width: 100px; }
+.width-50p{ width: 50px; }
+
+
+.table_center{
+	align-content: center;
+	text-align: center;
+	margin: auto;
+}
+
+/* menu 설정 */
+.menu_grid {
+	width: 70%;
+	height: auto;
+	border: 1px;
+	border-color: red;
+	border-style: dotted;
+}
+
+.tabs{
+	display: inline-block;
+	width: 80%;
+	
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	height: 32px;
+	border-bottom: 1px solid #eee;
+	border-left: 1px solid #eee;
+	font-family: "dotum";
+	font-size: 14px;
+	
+}
+#container {
+	width: 100%;
+	align-content: center;
+	text-align: center;
+}
+.tab_container {
+	border: 1px solid;
+	border-top: none;
+	clear: both;
+	float: left;
+	width: 100%;
+}
+.tab_content {
+	padding: 5px;
+	width: 98%;
+/* 	border:1px solid red;  */
+	font-size: 12px;
+	display: none;
+}
+.tab_category{
+	display: inline-block;
+	width: 100%;
+}
+.dis_in_block{
+	display: inline-block;
+}
+
+.tab_container .tab_content ul {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+.tab_container .tab_content ul li {
+	padding: 5px;
+	list-style: none;
+}
+
+ul.tabs li {
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	width: 100px;
+	height: 35px;
+	line-height: 31px;
+	border: 1px solid #eee;
+	border-left: none;
+	font-weight: bold;
+	background: #c0c0c0;
+	overflow: hidden;
+	position: relative;
+}
+
+ul.tabs li.active {
+	background: #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
+}

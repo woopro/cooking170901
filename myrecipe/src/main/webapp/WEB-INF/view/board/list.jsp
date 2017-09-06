@@ -213,14 +213,14 @@
 			</div>
 			<br>
 			<div class="row">
-				<div class="line-black q_nav">배송지연/불만</div>
-				<div class="line-black q_nav">반품문의</div>
-				<div class="line-black q_nav">환불문의</div>
-				<div class="line-black q_nav">교환/취소문의</div>
-				<div class="line-black q_nav">상품정보문의</div>
+				<div class="line-black q_nav" onclick="location.href='blist?cg=1#q2';">배송지연/불만</div>
+				<div class="line-black q_nav" onclick="location.href='blist?cg=2#q2';">반품문의</div>
+				<div class="line-black q_nav" onclick="location.href='blist?cg=3#q2';">환불문의</div>
+				<div class="line-black q_nav" onclick="location.href='blist?cg=4#q2';">교환/취소문의</div>
+				<div class="line-black q_nav" onclick="location.href='blist?cg=5#q2';">상품정보문의</div>
 			</div>
 			<div class="row center">
-				<table class="user-table area-100 center"> 
+				<table class="user-table area-100 center" border="1"> 
 					<thead>
 						<tr>
 							<th>번호</th>
@@ -232,7 +232,7 @@
 					</thead>
 					<tbody>
 						<c:forEach var="list" items="${list}">
-							<tr>
+							<tr class="title">
 								<td>${list.no}</td>
 								<td align="left">
 									<img src="${pageContext.request.contextPath}/image/board_lock.png" width="30", height="30" 
@@ -291,6 +291,7 @@
 		
 			<!-- 검색창 -->
 			<form action="blist#q2">
+				<input type="hidden" name="cg" value="${cg}">
 				<div class="row">
 					<select name="type" class="select_box" id="sch">
 						<c:if test="${empty type}">

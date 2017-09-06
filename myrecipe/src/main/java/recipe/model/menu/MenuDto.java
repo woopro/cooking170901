@@ -26,56 +26,57 @@ public class MenuDto {
 	private String image_num;
 	private String reg;
 	
-	public String getReg() {
-		return reg;
-	}
-	public void setReg(String reg) {
-		this.reg = reg;
-	}
+
 	public MenuDto(HttpServletRequest req) throws SQLException {
 		Map<String, String[]> a = req.getParameterMap();
-		for(Map.Entry<String, String[]> entry: a.entrySet()) {
-			log.debug("Key: " + entry.getKey() + "	// Value: " + entry.getValue()[0]);
-		};
-		
+//		log.debug("DTO 추가 중입니다...");
+//		for(Map.Entry<String, String[]> entry: a.entrySet()) {
+//			log.debug("Key: " + entry.getKey() + "	// Value: " + entry.getValue()[0]);
+//		};
+		String no = req.getParameter("no");
+		if(no == null || no == "") no = "0";
+		setMenu_no(no==("0")?0:Integer.parseInt(no));
 		setName(req.getParameter("name"));
 		setType(req.getParameter("type"));
 		String price = req.getParameter("price");
-		
 		setPrice(price==null?0:Integer.parseInt(price));
-		setOp1_name(req.getParameter("op1"));
+		
+		setOp1_name(req.getParameter("op1_name"));
 		String op1_price = (req.getParameter("op1_price"));
-		setOp1_price(op1_price==null?0:Integer.parseInt(op1_price));
-		setOp2_name(req.getParameter("op2"));
+		setOp1_price(op1_price==""?0:Integer.parseInt(op1_price));
+		
+		setOp2_name(req.getParameter("op2_name"));
 		String op2_price = (req.getParameter("op2_price"));
-		setOp2_price(op2_price==null?0:Integer.parseInt(op2_price));
-		setOp3_name(req.getParameter("op3"));
+		setOp2_price(op2_price==""?0:Integer.parseInt(op2_price));
+		
+		setOp3_name(req.getParameter("op3_name"));
 		String op3_price = (req.getParameter("op3_price"));
-		setOp3_price(op3_price==null?0:Integer.parseInt(op3_price));
+		setOp3_price(op3_price==""?0:Integer.parseInt(op3_price));
 		
 		setStat(req.getParameter("stat"));
 		setStat_grade(req.getParameter("stat_grade"));
 //		setImage_num(req.getParameter("image_num"));
-		log.debug("req 처리 완료");
+//		log.debug("req 처리 완료");
 	}
 	public MenuDto(ResultSet rs) throws SQLException {
-		log.debug("rs 방문");
-		
+//		log.debug("rs 방문");
 		setMenu_no(rs.getInt("menu_no"));
 		setType(rs.getString("type"));
 		setName(rs.getString("name"));
 		setPrice(rs.getInt("price"));
 		setOp1_name(rs.getString("op1_name"));
 		setOp1_price(rs.getInt("op1_price"));
-		setOp1_name(rs.getString("op2_name"));
-		setOp1_price(rs.getInt("op2_price"));
-		setOp1_name(rs.getString("op3_name"));
-		setOp1_price(rs.getInt("op3_price"));
+		setOp2_name(rs.getString("op2_name"));
+		setOp2_price(rs.getInt("op2_price"));
+		setOp3_name(rs.getString("op3_name"));
+		setOp3_price(rs.getInt("op3_price"));
 		setStat(rs.getString("stat"));
 		setStat_grade(rs.getString("stat_grade"));
 //		setImage_num(rs.getString("image_num"));
 		setReg(rs.getString("reg"));
 	}
+	
+	
 	public int getMenu_no() {
 		return menu_no;
 	}
@@ -154,12 +155,18 @@ public class MenuDto {
 	public void setImage_num(String image_num) {
 		this.image_num = image_num;
 	}
+	public String getReg() {
+		return reg;
+	}
+	public void setReg(String reg) {
+		this.reg = reg;
+	}
 	@Override
 	public String toString() {
-		return "menuDto [menu_no=" + menu_no + ", type=" + type + ", name=" + name + ", price=" + price + ", op1_name="
-				+ op1_name + ", op1_price=" + op1_price + ", op2_name=" + op2_name + ", op2_price=" + op2_price
-				+ ", op3_name=" + op3_name + ", op3_price=" + op3_price + ", stat=" + stat + ", stat_grade="
-				+ stat_grade + ", image_num=" + image_num + "]";
+		return "MenuDto [log=" + log + ", menu_no=" + menu_no + ", type=" + type + ", name=" + name + ", price=" + price
+				+ ", op1_name=" + op1_name + ", op1_price=" + op1_price + ", op2_name=" + op2_name + ", op2_price="
+				+ op2_price + ", op3_name=" + op3_name + ", op3_price=" + op3_price + ", stat=" + stat + ", stat_grade="
+				+ stat_grade + ", image_num=" + image_num + ", reg=" + reg + "]";
 	}
 	
 }

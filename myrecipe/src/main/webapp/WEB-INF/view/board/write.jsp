@@ -5,10 +5,36 @@
 
 <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
 <link rel="stylesheet" type="text/css" href="/myrecipe/css/main.css">
-<script type="text/javascript" src="/myrecipe/js/jquery.cleditor.js"></script>
 <script type="text/javascript" src="/myrecipe/js/ckeditor/ckeditor.js"></script>
 
 <script>
+	var cnt = 1;
+	$(document).ready(function(){
+		$("#add").on("click", function(){
+			if(cnt==3) {
+				alert("파일 첨부는 최대 3개까지 가능합니다.");				
+			} else {
+				cnt = cnt+1;
+// 				var input = "<br><input type='file' id='file' name='file'>";
+				var input = $("<input/>").attr({id:"file"+cnt, type:"file", name:"file"});
+				var img = $("<img>").attr({src:"/myrecipe/image/x.jpg", 
+						id:"img"+cnt, style:"vertical-align: middle;",width:"20", height:"20"});
+				$(".addFile").append("<br>").append(img).append(input);
+			}
+		});
+		$("#img2").on("click", function(){
+			console.log("img2 클릭");
+			$("#file2").remove();
+			cnt-=1;
+		});
+		
+		$("#img3").on("click", function() {
+			console.log("img3 클릭");
+			$("#file3").remove();
+			cnt-=1;
+		});
+	});
+
 	function input() {
 	    var max = 2000;
 	    var length = 0;
@@ -100,8 +126,9 @@
 					</tr>
 					<tr>
 						<th>파일 첨부</th>
-						<td>
+						<td class="addFile">
 							<input type="file" name="file" id="file">
+							<input type="button" id="add" class="input-btn" value="추가" style="float:right;">
 						</td>
 					</tr>
 					<tr>

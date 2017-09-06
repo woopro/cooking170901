@@ -58,8 +58,11 @@ public class BoardController {
 				}
 			}
 		}
+//		log.info("category = "+request.getParameter("cg"));
 		String type = request.getParameter("type");
 		String key = request.getParameter("key");
+		String cg = request.getParameter("cg");
+		
 //		log.info("type = "+type);
 //		log.info("key = "+key);
 		String pageStr = request.getParameter("page");
@@ -79,9 +82,9 @@ public class BoardController {
 		int end = start+boardSize-1;
 		if(end > boardCount) end = boardCount;
 		
-		
-		List<BoardDto> list = bdao.list(type, key, start, end);
-		
+			
+//		List<BoardDto> list = bdao.list(type, key, start, end);
+		List<BoardDto> list = bdao.list(type, key, cg, start, end);
 		
 		int blockSize = 10;
 		int blockTotal = (boardCount + boardSize -1)/boardSize;
@@ -93,6 +96,7 @@ public class BoardController {
 		if(type!=null && key!=null) 
 			url += "type="+type+"&key="+key;
 		
+		model.addAttribute("cg", cg);
 		model.addAttribute("type", type);
 		model.addAttribute("key", key);
 		model.addAttribute("url", url);
@@ -165,8 +169,8 @@ public class BoardController {
 		File target = new File(save, title);
 		if(!target.exists()) target.mkdirs();
 		file.transferTo(target);
-//		return "redirect:/binfo?no="+no;
-		return "redirect:/blist";
+		return "redirect:/binfo?no="+no;
+//		return "redirect:/blist";
 	}
 	
 	@RequestMapping("/binfo")

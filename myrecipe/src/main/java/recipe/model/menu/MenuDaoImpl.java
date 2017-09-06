@@ -51,12 +51,28 @@ public class MenuDaoImpl implements MenuDao {
 		String sql = "select * from menu where "+type+" like '%'||?||'%' order by reg desc";
 		return jdbcTemplate.query(sql, new Object[] {key} ,mapper);
 	}
-
 	@Override
-	public MenuDto delete(int no) {
-		String sql = "delete no=? from menu";
-		jdbcTemplate.query(sql, new Object[] {no} ,mapper);
-		return null;
+	public boolean update(MenuDto dto) {
+		String sql = "update menu set name=?,price=?,type=?"
+				+ ",op1_name=?,op1_price=?,op2_name=?,op2_price=?,op3_name=?,op3_price=?"
+				+ ",stat=?,stat_grade=? where menu_no=?";
+		int res = jdbcTemplate.update(sql,
+				dto.getName(),dto.getPrice(),dto.getType(),
+				dto.getOp1_name(),dto.getOp1_price(),
+				dto.getOp2_name(),dto.getOp2_price(),
+				dto.getOp3_name(),dto.getOp3_price(),
+				dto.getStat(),dto.getStat_grade(),
+				dto.getMenu_no());
+		log.debug(dto.getMenu_no()+"번 메뉴 / 수정 완료 ");
+		log.debug("수정 내용 :  "+dto.toString());
+		return res>0;
+	}
+	@Override
+	public boolean delete(int no) {
+		String sql = "delete menu where menu_no=?";
+		int res = jdbcTemplate.update(sql, no);
+		log.debug(no+"번 메뉴 / 삭제 완료 ");
+		return res>0;
 	}
 
 }

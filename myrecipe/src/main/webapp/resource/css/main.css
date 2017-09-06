@@ -87,6 +87,7 @@ li a:hover {
 .area-100{ width: 100%; }
 .area-90{ width: 90%; }
 .area-80{ width: 80%; }
+.area-75{ width: 75%; }
 .area-70{ width: 70%; }
 .area-60{ width: 60%; }
 .area-50{ width: 50%; }
@@ -173,16 +174,15 @@ li a:hover {
 .user-table{
     border-collapse: collapse;
     margin: 40px auto;
-    border-top: 1px thin;
-    border-bottom: 1px thin;
+/*     border-top: 1px thin; */
+/*     border-bottom: 1px thin; */
 }
 
 .user-table th, .user-table td{
     font-size: 20px;
     padding: 10px;
-    border-bottom: 1px thin;
+/*     border-bottom: 1px thin; */
 }
-
 
 .user-table .title{
     width:50%;
@@ -349,7 +349,7 @@ a:hover{
 /* 게시판 각 페이지의 버튼이 설정된 div 속성 */
 .btn_area {
 /* 	overflow: hidden; */
-    margin: 20px 0px 70px 50px;
+    margin: 20px 0px 70px 10px;
     text-align: right;
 }
 
@@ -388,6 +388,10 @@ input[type="checkbox"] {
 	display:inline;
 	margin-left: 10px;
 	font-size: 20px;
+	padding: 10px;
+	background-color: rgb(254,235,241);
+	font-family: "굴림";
+	cursor: pointer;
 }
 
 

@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/view/template/header.jsp"%>
+
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/write.css">
+	
 <form action="write" method="post">
 	<div class="order-header">
 		<div class="order-title">주문서 작성</div>
@@ -21,9 +25,10 @@
 			<tbody>
 				<tr>
 					<td><img src="https://placehold.it/300x200"></td>
-					<td>메뉴 이름</td>
-					<td>${menu_cnt}개</td>
-					<td>메뉴 가격</td>
+					<td>${menuInfo.name }</td>
+					<td>${menu_cnt}개<br> <span>(개당 ${menuInfo.price }원)</span>
+					</td>
+					<td class="item-price">${menuInfo.price * menu_cnt }원</td>
 				</tr>
 			</tbody>
 		</table>
@@ -32,23 +37,32 @@
 	<div class="order-header-line"></div>
 
 	<!-- 주문정보 입력  -> 기존 정보에서 가져옴-->
+	<input type="hidden" name="no_member" value="${memberInfo.no }">
+	<input type="hidden" name="menu_cnt" value="${menu_cnt}"> <input
+		type="hidden" name="no_menu" value="${menuInfo.menu_no }"> <input
+		type="hidden" name="menu_price" value="${menuInfo.price }">
+
 	<div class="order-info">주문자 정보</div>
 	<table class="orderinfo">
 		<tr>
 			<td class="info-label">주문하시는 분</td>
-			<td><input type="text" name="name" placeholder="주문하시는 분"></td>
+			<td><input type="text" placeholder="${memberInfo.name }"
+				readonly></td>
 		</tr>
 		<tr>
 			<td class="info-label">주소</td>
-			<td><input type="text" name="address" readonly></td>
+			<td><input type="text" placeholder="${memberInfo.addr1 }"
+				readonly></td>
 		</tr>
 		<tr>
 			<td class="info-label">핸드폰 번호</td>
-			<td><input type="tel" name="phon"></td>
+			<td><input type="tel" placeholder="${memberInfo.phone }"
+				readonly></td>
 		</tr>
 		<tr>
 			<td class="info-label">이메일</td>
-			<td><input type="email" name="email"></td>
+			<td><input type="email" placeholder="${memberInfo.email }"
+				readonly></td>
 		</tr>
 	</table>
 
@@ -59,31 +73,39 @@
 	<table class="orderinfo">
 		<tr>
 			<td class="info-label">배송지 선택</td>
-			<td><input type="checkbox" name="normal">기본배송지 <input
-				type="checkbox" name="recent">최근배송지</td>
+			<td><input type="radio" name="d_choice" value="normal"
+				onclick="div_OnOff(this.value);" checked>기본배송지
+				<input type="radio" name="d_choice" value="recent" onclick="div_OnOff(this.value);">최근배송지
+				<input type="radio" name="d_choice" value="new" onclick="div_OnOff(this.value);">신규배송지</td>
 		</tr>
+
 		<tr>
 			<td class="info-label">받으실 분</td>
-			<td><input type="text" name="address"></td>
+			<td><input type="text" name="name" value="${memberInfo.name }"
+				required></td>
 		</tr>
+		
 		<tr>
 			<td class="info-label">받으실 곳</td>
-			<td><input type="text" id="post" placeholder="우편번호"> <input
-				type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="addr1" placeholder="주소"> <input
-				type="text" id="addr2" placeholder="상세주소"></td>
+			<td>
+				<input type="text" name="post" id="post" placeholder="우편번호" value="${memberInfo.post}" required>
+				<input type="button" onclick="sample6_execDaumPostcode();" value="우편번호 찾기"><br>
+				<input type="text" name="addr1" id="addr1" value="${memberInfo.addr1}" placeholder="주소">
+				<input type="text" name="addr2" id="addr2" value="${memberInfo.addr2}" placeholder="상세주소" required>
+				</td>
 		</tr>
 		<tr>
 			<td class="info-label">연락처</td>
-			<td><input type="tel" name="phon"></td>
+			<td><input type="tel" name="tel" value="${memberInfo.phone }"
+				required></td>
 		</tr>
 		<tr>
 			<td class="info-label">배송일 선택</td>
-			<td><input type="date" name="want_date"></td>
+			<td><input type="date" name="want_date" required></td>
 		</tr>
 		<tr>
 			<td class="info-label">남기실 말씀</td>
-			<td><input type="text" name="comment"></td>
+			<td><input type="text" name="comments"></td>
 		</tr>
 	</table>
 
@@ -99,10 +121,12 @@
 			<td>총 결제 예정 금액</td>
 		</tr>
 		<tr>
-			<td>22,900</td>
+			<td>${menuInfo.price * menu_cnt }</td>
 			<td>3,000</td>
 			<td>0</td>
-			<td>26,400</td>
+			<td>${menuInfo.price * menu_cnt + 3000}</td>
+			<input type="hidden" name="totalprice"
+				value="${menuInfo.price * menu_cnt + 3000}">
 		</tr>
 	</table>
 
@@ -112,9 +136,10 @@
 	<table class="orderinfo">
 		<tr>
 			<td>일반결제</td>
-			<td><input type="checkbox">신용카드 <input type="checkbox">계좌이체
-				<input type="checkbox">핸드폰 <input type="checkbox">무통장입금
-			</td>
+			<td><input type="radio" name="payment" value="creditcard" checked>신용카드
+				<input type="radio" name="payment" value="account">계좌이체 <input
+				type="radio" name="payment" value="phone">핸드폰 <input
+				type="radio" name="payment" value="noaccount">무통장입금</td>
 		</tr>
 	</table>
 
@@ -126,6 +151,7 @@
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+
 	function sample6_execDaumPostcode() {
 		new daum.Postcode(
 				{
@@ -170,6 +196,27 @@
 					}
 				}).open();
 	}
+	
+	function div_OnOff(v){
+		if(v == "normal"){
+			document.getElementById('post').value = '${memberInfo.post}';
+			document.getElementById('addr1').value = '${memberInfo.addr1}';
+			document.getElementById('addr2').value = '${memberInfo.addr2}';
+		}
+	
+		if(v == "recent"){
+			document.getElementById('post').value = '${recentOrder.post}';
+			document.getElementById('addr1').value = '${recentOrder.addr1}';
+			document.getElementById('addr2').value = '${recentOrder.addr2}';
+		}
+	
+		if(v == "new"){
+			document.getElementById('post').value  = '';
+			document.getElementById('addr1').value = '';
+			document.getElementById('addr2').value = '';
+		}
+	}
+	
 </script>
 
 <%@ include file="/WEB-INF/view/template/footer.jsp"%>

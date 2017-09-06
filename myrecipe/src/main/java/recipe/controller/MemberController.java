@@ -95,14 +95,19 @@ public class MemberController {
    }
    @RequestMapping(value="/login",method=RequestMethod.POST)
    public String Login(HttpServletResponse response,@RequestParam String email, @RequestParam String password,HttpSession session) {
-   log.info("이메일: "+email+"  비밀번호:"+password);   
+   log.info("이메일: "+email+"  비밀번호:"+password);
+   String go = "redirect:/";
    boolean result = memberDaoImpl.login(email, password);
    if(!result) {log.info("연결 실패 혹은 계정 없음");}else{log.info("로그인 성공"+result);
    Cookie c = new Cookie("memberEmail",email);
    c.setComment("회원 이메일");
    c.setMaxAge(60*60*24);
-   response.addCookie(c);}
-      return "home";
+   response.addCookie(c);
+   if(email.equals("admin@myrecipe.com")) {
+	   go = "admin/adminmenu";
+   }
+   }
+      return go;
    }
    /*로그아웃 컨트롤러*/
    @RequestMapping("/logout")
@@ -126,17 +131,20 @@ public class MemberController {
        kc.setMaxAge(0) ;
        response.addCookie(kc) ;
 
-      return "home";
+      return "redirect:/";
    }
    @RequestMapping("tac")
    public String Check() {
       return "member/tac";
    }
-   @RequestMapping("list")
+   @RequestMapping("memberlist")
    public String List(Model model) {
 	   List<MemberDto> list = memberDaoImpl.list();
 	   model.addAttribute("memberlist",list);
-	   return "member/memberlist";
+	   return "admin/memberlist";
    }
-   
+   @RequestMapping("admin")
+   public String admenu() {
+	   return "admin/adminmenu";
+   }
 }

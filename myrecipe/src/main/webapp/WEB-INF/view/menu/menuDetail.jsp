@@ -30,11 +30,11 @@ div {
 </head>
 <body>
 	<div align="center">
-		<h1>상품 등록 화면</h1>
+		<h1>상품 수정 화면</h1>
 	</div>
 	<div class="item_body">
 		<div align="center">
-			<form id="madd" action="madd" method="POST">
+			<form id="mupdate" action="mupdate" method="POST">
 				<div class="in-flex">
 					메뉴 이미지 <br>
 					<div class="block">
@@ -58,7 +58,7 @@ div {
 						<img src="http://via.placeholder.com/150x150" height="150"
 							width="150">
 						<p>
-							<input type="file" name="recipe" required>
+							<input type="file" name="recipe">
 						</p>
 					</div>
 				</div>
@@ -80,47 +80,54 @@ div {
 							</tr>
 							<tr>
 								<th>가격 :</th>
-								<th><input type="number" name="price"></th>
+								<th><input type="number" name="price" value="${mdto.price}"></th>
 							</tr>
 							<tr>
 								<th>옵션1 :</th>
-								<th><input type="text" name="op1" placeholder="고기 추가"></th>
+								<th><input type="text" name="op1_name" placeholder="고기 추가" value="${mdto.op1_name}"></th>
 							</tr>
 							<tr>
 								<th>옵션1 가격 :</th>
-								<th><input type="number" name="op1_price"></th>
+								<th><input type="number" name="op1_price" value="${mdto.op1_price}"></th>
 							</tr>
 							<tr>
 								<th>옵션2 :</th>
-								<th><input type="text" name="op2" placeholder="야채 추가"></th>
+								<th><input type="text" name="op2_name" placeholder="야채 추가" value="${mdto.op2_name}"></th>
 							</tr>
 							<tr>
 								<th>옵션2 가격 :</th>
-								<th><input type="number" name="op2_price"></th>
+								<th><input type="number" name="op2_price" value="${mdto.op2_price}"></th>
 							</tr>
 							<tr>
 								<th>옵션3 :</th>
-								<th><input type="text" name="op3" placeholder="양념 추가"></th>
+								<th><input type="text" name="op3_name" placeholder="양념 추가" value="${mdto.op3_name}"></th>
 							</tr>
 							<tr>
 								<th>옵션3 가격 :</th>
-								<th><input type="number" name="op3_price"></th>
+								<th><input type="number" name="op3_price" value="${mdto.op3_price}"></th>
 							</tr>
 							<tr>
 								<th>상태 :</th>
 								<th>
-								<input type="radio" name="stat" value="sell" checked="checked">판매중 
-								<input type="radio" name="stat" value="soldout">판매중지
+								<input type="radio" name="stat" value="판매중" checked="checked">판매중 
+								<input type="radio" name="stat" value="판매중지">판매중지
+								</th>
+							</tr>
+							<tr>
+								<th>상품 등급 :</th>
+								<th>
+								<input type="radio" name="stat_grade" value="일반" checked="checked">일반
+								<input type="radio" name="stat_grade" value="인기">인기
+								<input type="radio" name="stat_grade" value="베스트">베스트
 								</th>
 							</tr>
 						</tbody>
 					</table>
 					<br>
-					<br> <input type="hidden" name="menu_no value=${mdto.menu_no}">
-					<input type="hidden" name="stat_grade" value="일반">
+					<br> <input type="hidden" name="no" value="${mdto.menu_no}">
 					<div align="center">
-						<input type="submit" value="등록"> 
-						<input type="button" value="취소" onclick="location.href='mlist'">
+						<input type="submit" value="수정하기"> 
+						<input type="button" value="취소" onclick="location.href='mmodi'">
 					</div>
 				</div>
 				

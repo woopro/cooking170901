@@ -86,7 +86,7 @@
 				</tr>
 			</table>
 		</div>
-		<div class="btn_area area-70 center">
+		<div class="btn_area area-75 center" style="margin-left: 120px;">
 			<span class="left">
 				<input type="button" class="input-btn" value="목록" onclick="location.href='blist#q2';">
 				<input type="button" class="input-btn" value="답글">

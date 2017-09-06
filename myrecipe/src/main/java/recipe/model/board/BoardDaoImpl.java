@@ -7,10 +7,21 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
 @Repository(value="bdao")
 public class BoardDaoImpl implements BoardDao {
-
+	
+	public static final String TITLE = "title";
+	public static final String NAME = "name";
+	public static final String CATEGORY = "category";
+		
+	public static final String CG_1 = "1";
+	public static final String CG_2 = "2";
+	public static final String CG_3 = "3";
+	public static final String CG_4 = "4";
+	public static final String CG_5 = "5";
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -39,57 +50,120 @@ public class BoardDaoImpl implements BoardDao {
 		String sql = "select * from board where board_no = ?";
 		return jdbcTemplate.query(sql, new Object[] {no}, extractor);
 	}
-
+	
 //	@Override
-//	public List<BoardDto> list(String type, String key) {
-//		String sql = "select * from board where "+type+" like '%'||?||'%' order by reg desc";
-//		return jdbcTemplate.query(sql, new Object[] {key} ,mapper);
+//	public List<BoardDto> list(int start, int end) {
+////		System.out.println("맨 처음 게시판 들어가면 실행되는 메소드");
+//		String sql = "select * from "
+//						+ "(select rownum rn, A.* from "
+//						+ "(select * from board order by reg desc)A)"
+//						+ "where rn between ? and ?";
+//		return jdbcTemplate.query(sql, new Object[] {start, end}, mapper);
 //	}
 	
 	@Override
-	public List<BoardDto> list(int start, int end) {
+	public List<BoardDto> list(int start, int end, String cg) {
+		String sql = null;
+		if(cg==null) {
+			sql = "select * from "
+					+ "(select rownum rn, A.* from "
+					+ "(select * from board order by reg desc)A)"
+					+ "where rn between ? and ?";
+			return jdbcTemplate.query(sql, new Object[] {start, end}, mapper);
+		} else {
+			switch(cg) {
+			case CG_1: cg="배송지연/불만"; break;
+			case CG_2: cg="반품문의"; break;
+			case CG_3: cg="환불문의"; break;
+			case CG_4: cg="교환/취소문의"; break;
+			case CG_5: cg="상품정보문의"; break;
+		}
+	
 //		System.out.println("맨 처음 게시판 들어가면 실행되는 메소드");
-		String sql = "select * from "
+		sql = "select * from "
 						+ "(select rownum rn, A.* from "
-						+ "(select * from board order by reg desc)A)"
+						+ "(select * from board where category = ? order by reg desc)A)"
 						+ "where rn between ? and ?";
-		return jdbcTemplate.query(sql, new Object[] {start, end}, mapper);
+			return jdbcTemplate.query(sql, new Object[] {cg, start, end}, mapper);
+		}
 	}
 	
-	public static final String TITLE = "title";
-	public static final String NAME = "name";
-	public static final String CATEGORY = "category";
+	
+	
+//	@Override
+//	public List<BoardDto> list(String type, String key, int start, int end) {
+//		if(type==null || key==null) {
+//			return list(start, end);
+//		}
+////		System.out.println("검색하면 실행되는 메소드");
+//		switch(type) {
+//		case TITLE:
+//		case NAME:
+//		case CATEGORY:
+//			return oneSearch(type, key,start, end);
+//		}
+//		return null;
+//	}
 	
 	@Override
-	public List<BoardDto> list(String type, String key, int start, int end) {
+	public List<BoardDto> list(String type, String key, String cg, int start, int end) {
 		if(type==null || key==null) {
-			return list(start, end);
+			return list(start, end, cg);
 		}
-//		System.out.println("검색하면 실행되는 메소드");
+			
 		switch(type) {
-		case TITLE:
-		case NAME:
-		case CATEGORY:
-			return oneSearch(type, key,start, end);
+			case TITLE:
+			case NAME:
+			case CATEGORY:
+				return oneSearch(type, key, cg, start, end);
 		}
 		return null;
 	}
+	
+	
 
+	
+//	@Override
+//	public List<BoardDto> oneSearch(String type, String key, int start, int end) {
+//		switch(type) {
+//		case TITLE: type="title"; break;
+//		case NAME: type="name"; break;
+//		case CATEGORY: type="category"; break;
+//		}
+//		String sql = "select * from "
+//				+ "(select rownum rn, TMP.* from "
+//				+ "(select * from board "
+//				+ "where "+type+" like '%'||?||'%' "
+//						+ "order by reg desc)TMP) "
+//						+ "where rn between ? and ?";
+//		return jdbcTemplate.query(sql, new Object[] {key, start, end},mapper);
+//	}
 	@Override
-	public List<BoardDto> oneSearch(String type, String key, int start, int end) {
+	public List<BoardDto> oneSearch(String type, String key, String cg, int start, int end) {
 		switch(type) {
 		case TITLE: type="title"; break;
 		case NAME: type="name"; break;
 		case CATEGORY: type="category"; break;
 		}
+		
+		switch(cg) {
+		case CG_1: cg="배송지연/불만"; break;
+		case CG_2: cg="반품문의"; break;
+		case CG_3: cg="환불문의"; break;
+		case CG_4: cg="교환/취소문의"; break;
+		case CG_5: cg="상품정보문의"; break;
+		}
+		
 		String sql = "select * from "
 				+ "(select rownum rn, TMP.* from "
 				+ "(select * from board "
-				+ "where "+type+" like '%'||?||'%' "
+				+ "where "+type+" like '%'||?||'%' and category = ? "
 						+ "order by reg desc)TMP) "
 						+ "where rn between ? and ?";
-		return jdbcTemplate.query(sql, new Object[] {key, start, end},mapper);
+		return jdbcTemplate.query(sql, new Object[] {key, cg, start, end},mapper);
 	}
+	
+	
 	
 	@Override
 	public List<BoardDto> myQnA(String name) {
