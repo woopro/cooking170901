@@ -174,7 +174,7 @@ public class BoardController {
 		bdao.read(no);
 		BoardDto bdto = bdao.info(no);
 		model.addAttribute("bdto", bdto);
-		log.debug("업로드된 filename = "+bdto.getFilename());
+//		log.debug("업로드된 filename = "+bdto.getFilename());
 		return "board/info";
 	}
 	

@@ -5,23 +5,13 @@
 <!Doctype HTML>
 <html>
 <head>
-<title>My Cooking</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/main.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/order.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/write.css">
-	<script src="/js/jquery-latest.js" type="text/javascript"></script>
-<script src="/js/jquery.tablesorter.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	$("myTable").tablesorter({
-		// sort on the first column and third column, order asc
-		sortList: [[0,0],[2,0]]
-	});
-});
-</script>
+	<title>My Cooking</title>
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/css/main.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/css/order.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/css/write.css">
 </head>
 <body>
 	<div class="page">

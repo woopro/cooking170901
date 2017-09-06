@@ -66,19 +66,19 @@
 					<td class="detail">${bdto.detail2}</td>			
 				</tr>
 				<tr>
-					<th clss="title" id="prev" >업로드 파일</th>
-					<td>
-						<c:choose>
-							<c:when test="${empty bdto.filename}">
-								업로드된 파일 없음
-							</c:when>
-							<c:otherwise>
+					<th clss="title">업로드 파일</th>
+					<c:choose>
+						<c:when test="${empty bdto.filename}">
+							<td>업로드 된 파일 없음</td>
+						</c:when>
+						<c:otherwise>
+							<td id="prev">
 								<img src = "http://placehold.it/50X50" 
-										class="pic" height="50" style="vertical-align: middle;">
+										class="pic" style="vertical-align: middle;">
 								<a href="download/${bdto.filename}?name=${bdto.name}">${bdto.filename}</a> (${bdto.filesize} byte)
-							</c:otherwise>
-						</c:choose>
-					</td>
+							</td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 				<tr>
 					<th class="title">작성일</th>

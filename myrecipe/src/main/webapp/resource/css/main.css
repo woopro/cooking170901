@@ -393,15 +393,15 @@ input[type="checkbox"] {
 
 
 /* info페이지 미리보기 */
-#preview{
-	z-index: 9999;
-	position:absolute;
-	border:0px solid #ccc;
-	background:#333;
-	padding:1px;
-	display:none;
-	color:#fff;
-}
+/* #preview{ */
+/* 	z-index: 9999; */
+/* 	position:absolute; */
+/* 	border:0px solid #ccc; */
+/* 	background:#333; */
+/* 	padding:1px; */
+/* 	display:none; */
+/* 	color:#fff; */
+/* } */
 
 /* 맨위로 가기 버튼 */
 a.jcm-top {
