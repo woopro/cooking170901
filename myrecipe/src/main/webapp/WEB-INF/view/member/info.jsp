@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/view/template/header.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/info.css">
+
 <body>
 		<table class="type09">
 			<thead>

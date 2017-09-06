@@ -7,6 +7,9 @@ title varchar2(300) not null,
 detail varchar2(4000) not null,
 pw varchar2(20) not null,
 read number not null,
+filename varchar2(256), 
+filesize number,
+filetype varchar2(30),
 reg date not null
 );
 

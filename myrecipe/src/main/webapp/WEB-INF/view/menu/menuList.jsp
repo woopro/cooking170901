@@ -3,7 +3,6 @@
 <%@ include file="/WEB-INF/view/template/header.jsp"%>
 
 <link rel="stylesheet" type="text/css" href="/recipe/css/main.css">
-<script src="http://code.jquery.com/jquery-3.2.1.js"></script>
 
 <html>
 <head>

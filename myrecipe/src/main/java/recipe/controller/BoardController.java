@@ -1,19 +1,31 @@
 package recipe.controller;
 
+import java.io.File;
+import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import net.sf.jmimemagic.Magic;
+import net.sf.jmimemagic.MagicMatchNotFoundException;
 import recipe.model.board.BoardDao;
 import recipe.model.board.BoardDto;
 import recipe.model.member.MemberDao;
@@ -121,10 +133,39 @@ public class BoardController {
 		return "board/write";
 	}
 	
+	private String[] typeFilter = new String[] {
+			"image/png", "image/jpeg", "image/gif"
+	};
+	
 	@RequestMapping(value="/bwrite", method=RequestMethod.POST)
-	public String write(HttpServletRequest request) {
-		int no = bdao.write(new BoardDto(request));
-		return "redirect:/binfo?no="+no;
+	public String write(MultipartHttpServletRequest request) throws Exception {
+		MultipartFile file = request.getFile("file");
+		String title = file.getOriginalFilename();
+		title = title.substring(0, title.indexOf("."));
+		long size = file.getSize();
+//		log.debug("업도르할 파일 이름  = "+title);
+//		log.debug("파일 크기 = "+size);
+		
+		//확장자 판별 하는 라이브러리 이용
+		String mime = Magic.getMagicMatch(file.getBytes()).getMimeType();
+		log.debug("mime = "+mime);
+		if((Arrays.binarySearch(typeFilter, mime)) < 0 ) {
+			throw new MagicMatchNotFoundException("GIF, JPG, PNG만 업로드가 가능합니다.");
+		}
+		
+		String save = request.getServletContext().getRealPath("/file/"+request.getParameter("name"));
+		log.debug("저장 위치  = "+save);
+		BoardDto bdto = new BoardDto(request);
+		bdto.setFilename(title);
+		bdto.setFilesize(size);
+		bdto.setFiletype(mime);
+		int no = bdao.write(bdto);
+		
+		File target = new File(save, title);
+		if(!target.exists()) target.mkdirs();
+		file.transferTo(target);
+//		return "redirect:/binfo?no="+no;
+		return "redirect:/blist";
 	}
 	
 	@RequestMapping("/binfo")
@@ -132,7 +173,7 @@ public class BoardController {
 		bdao.read(no);
 		BoardDto bdto = bdao.info(no);
 		model.addAttribute("bdto", bdto);
-		model.addAttribute("pw", bdto.getPw());
+		log.debug("업로드된 filename = "+bdto.getFilename());
 		return "board/info";
 	}
 	
@@ -156,6 +197,28 @@ public class BoardController {
 	public String delete(@RequestParam("no") int no, Model model) {
 		bdao.delete(no);
 		return "redirect:/blist";
+	}
+	
+	
+	@RequestMapping("/download/{filename}")
+	public void download(@PathVariable String filename,
+					HttpServletRequest request,
+					HttpServletResponse response) throws Exception { 
+		
+		String save = request.getServletContext().getRealPath("/file/"+request.getParameter("name"));
+		log.debug("다운 로드 받을 filename = "+filename);
+		File target = new File(save, filename);
+		byte[] data = FileUtils.readFileToByteArray(target);
+		
+		response.setContentType("application/octet-stream");		//전송 할 유형
+		response.setContentLength(data.length);						//전송 할 크기
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Content-Disposition",
+							"attachment:fileName=\""+filename+"\";");
+		
+		OutputStream out = response.getOutputStream();
+		out.write(data);
+		out.close();
 	}
 }
 

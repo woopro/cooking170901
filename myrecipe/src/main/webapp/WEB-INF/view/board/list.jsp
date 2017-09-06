@@ -18,24 +18,24 @@
 		preContent = curContent;
 	}
 	
-	function checkname(id1, id2) {
-		if(id1 == id2) {
-			return true;
-		} else {
-			alert("비밀글은 작성자만 볼 수 있습니다.");
-			return false;
-		}
-	}
+// 	function checkname(id1, id2) {
+// 		if(id1 == id2) {
+// 			return true;
+// 		} else {
+// 			alert("비밀글은 작성자만 볼 수 있습니다.");
+// 			return false;
+// 		}
+// 	}
 
-	function checkauth(auth) {
-		if(auth=="") auth=null;
-		if(auth==null) {
-			alert("비회원은 로그인 후 이용하여주세요.");
-			location.href="login";
-		}else {
-			location.href="bwrite";
-		}
-	}
+// 	function checkauth(auth) {
+// 		if(auth=="") auth=null;
+// 		if(auth==null) {
+// 			alert("비회원은 로그인 후 이용하여주세요.");
+// 			location.href="login";
+// 		}else {
+// 			location.href="bwrite";
+// 		}
+// 	}
 </script>
 
 <div class="page center">
@@ -329,16 +329,18 @@
 					<input type="submit" class="input-btn" value="검색">
 				</div>
 				<div class="row align-right">
-					<c:choose>
-						<c:when test="${empty ckValue}">
-								<input type="button" class="input-btn" value="글쓰기" 
-										onclick="checkauth('${ckValue}');" style="display: none;">
-						</c:when>
-						<c:otherwise>
-								<input type="button" class="input-btn" value="글쓰기" 
-										onclick="checkauth('${ckValue}');">
-						</c:otherwise>
-					</c:choose>
+				<input type="button" class="input-btn" value="글쓰기" 
+										onclick="location.href='bwrite';">
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${empty ckValue}"> --%>
+<!-- 								<input type="button" class="input-btn" value="글쓰기"  -->
+<%-- 										onclick="checkauth('${ckValue}');" style="display: none;"> --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<!-- 								<input type="button" class="input-btn" value="글쓰기"  -->
+<%-- 										onclick="checkauth('${ckValue}');"> --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
 				</div>
 			</form>
 			<div class="empty-row"></div>

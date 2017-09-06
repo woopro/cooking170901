@@ -26,10 +26,10 @@ public class BoardDaoImpl implements BoardDao {
 	public int write(BoardDto bdto) {
 		String sql = "select board_seq.nextval from dual";
 		int no = jdbcTemplate.queryForObject(sql, Integer.class);
-		sql = "insert into board values(?,?,?,?,?,?,?,0,sysdate)";
+		sql = "insert into board values(?,?,?,?,?,?,?,0,sysdate,?,?,?)";
 		Object[] obj = {
 				no,  bdto.getName(), bdto.getEmail(), bdto.getCategory(), bdto.getTitle(),
-				bdto.getDetail(), bdto.getPw()};
+				bdto.getDetail(), bdto.getPw(), bdto.getFilename(), bdto.getFilesize(), bdto.getFiletype()};
 		jdbcTemplate.update(sql, obj);
 		return no;
 	}

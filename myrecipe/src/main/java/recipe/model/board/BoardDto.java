@@ -17,6 +17,9 @@ public class BoardDto {
 	private String pw;
 	private int read;
 	private String reg;
+	private String filename;
+	private long filesize;
+	private String filetype;
 	
 	public BoardDto(HttpServletRequest request) {
 		String no = request.getParameter("board_no");
@@ -30,6 +33,10 @@ public class BoardDto {
 		String read = request.getParameter("read");
 		setRead(read==null?0:Integer.parseInt(read));
 		setReg(request.getParameter("reg"));
+		setFilename(request.getParameter("filename"));
+		String filesize = request.getParameter("filesize");
+		setFilesize(filesize==null?0L:Long.parseLong(filesize));
+		setFiletype(request.getParameter("filetype"));
 	}
 	public BoardDto(ResultSet rs) throws SQLException {
 		setNo(rs.getInt("board_no"));
@@ -41,6 +48,9 @@ public class BoardDto {
 		setPw(rs.getString("pw"));
 		setRead(rs.getInt("read"));
 		setReg(rs.getString("reg"));
+		setFilename(rs.getString("filename"));
+		setFilesize(rs.getLong("filesize"));
+		setFiletype(rs.getString("filetype"));
 	}
 	public int getNo() {
 		return no;
@@ -110,5 +120,23 @@ public class BoardDto {
 		if(getDate().equals(today))  	// 작성글이 오늘이면 년월일을 제외한 시간을 표시, 그렇지 않으면 년월일만 표시
 			return getTime();
 		else return getDate();
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public long getFilesize() {
+		return filesize;
+	}
+	public void setFilesize(long filesize) {
+		this.filesize = filesize;
+	}
+	public String getFiletype() {
+		return filetype;
+	}
+	public void setFiletype(String filetype) {
+		this.filetype = filetype;
 	}
 }

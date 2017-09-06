@@ -4,6 +4,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file= "/WEB-INF/view/template/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
+<script src="http://code.jquery.com/jquery-3.2.1.js"></script>
+
+<script>
+	$(document).ready(function(){
+		var xOffset = 10;
+		var yOffset = 30;
+		var toggle = false;
+		
+		$(document).on("click", ".pic", function(e){
+			if(!toggle) {
+				$("#prev").append("<p id='preview'><img src='"+ $(this).attr("src") + "' width='400px'/></p>");
+				$("#preview")
+					.css("top",(e.pageY - xOffset) + "px")
+					.css("left", (e.pageX - yOffset) + "px")
+					.fadeIn("fast");
+				toggle = true;
+			} else {
+				$("#preview").remove();
+				toggle = false;
+			}
+			
+		});
+	});	
+</script>
 
 <div class="page">
 	<div class="empty-row"></div>
@@ -41,6 +65,21 @@
 				<tr>
 					<th class="title">문의내용</th>
 					<td class="detail">${bdto.detail2}</td>			
+				</tr>
+				<tr>
+					<th clss="title">업로드 파일</th>
+					<td id="prev">
+						<c:choose>
+							<c:when test="${empty bdto.filename}">
+								업로드된 파일 없음
+							</c:when>
+							<c:otherwise>
+								<img src = "http://placehold.it/50X50" 
+										class="pic" height="50" style="vertical-align: middle;">
+								<a href="download/${bdto.filename}?name=${bdto.name}">${bdto.filename}</a> (${bdto.filesize} byte)
+							</c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
 				<tr>
 					<th class="title">작성일</th>

@@ -2,10 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/template/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="${pageContext.request.contextPath}/js/memberlist.js"></script>
-d
-<body>
-	<table border="1">
+	<table id="myTable" class="tablesorter">
 		<thead>
 			<tr>
 				<th>회원 번호</th>
@@ -18,21 +15,19 @@ d
 				<th>가입일</th>
 			</tr>
 		</thead>
-		<tbody>
-			<c:forEach var="list" items="${memberlist}">
+		<c:forEach var="list" items="${memberlist}">
+			<tbody>
 				<tr>
 					<td>${list.no}</td>
 					<td>${list.email}</td>
 					<td>${list.name}</td>
-					<td>(${list.telecom})${list.phone}</td>
+					<td>${list.telecom}${list.phone}</td>
 					<td>${list.post}</td>
 					<td>${list.addr1}</td>
 					<td>${list.addr2}</td>
 					<td>${list.reg}</td>
 				</tr>
-			</c:forEach>
-		</tbody>
+			</tbody>
+		</c:forEach>
 	</table>
-
-</body>
 <%@ include file="/WEB-INF/view/template/footer.jsp"%>

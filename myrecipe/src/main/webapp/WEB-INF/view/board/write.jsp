@@ -44,7 +44,7 @@
 		<div class="row center" style="background-color: rgb(239,239,239)">
 			<h1>문의 글 작성하기</h1>
 		</div>
-		<form action="bwrite" method="post" name="form">
+		<form action="bwrite" method="post" name="form" enctype="multipart/form-data">
 			<div class="row center">
 				<table class="user-table area-70">
 					<tr>
@@ -63,19 +63,22 @@
 					<tr>
 						<th>아이디</th>
 						<td>
-							<input type="email" class="user-input area-90" name="email" value="${mdto.email}" readonly>
+<%-- 							<input type="email" class="user-input area-90" name="email" value="${mdto.email}" readonly> --%>
+							<input type="email" class="user-input area-90" name="email" required>
 						</td>
 					</tr>
 					<tr>
 						<th>이름</th>
 						<td>
-							<input type="text" class="user-input area-90" name="name" value="${mdto.name}" readonly>
+<%-- 							<input type="text" class="user-input area-90" name="name" value="${mdto.name}" readonly> --%>
+							<input type="text" class="user-input area-90" name="name">
 						</td>
 					</tr>
 					<tr>
 						<th>이메일</th>
 						<td>
-							<input type="email" class="user-input area-90" name="email" value="${mdto.email}" readonly>
+<%-- 							<input type="email" class="user-input area-90" name="email" value="${mdto.email}" readonly> --%>
+							<input type="email" class="user-input area-90" name="email">
 						</td>
 					</tr>
 					<tr>
@@ -93,6 +96,12 @@
 											CKEDITOR.replace('content');
 										</script><br>
 							<div id="limit"></div>
+						</td>
+					</tr>
+					<tr>
+						<th>파일 첨부</th>
+						<td>
+							<input type="file" name="file" id="file">
 						</td>
 					</tr>
 					<tr>
